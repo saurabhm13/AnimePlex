@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    // Menu colors
+    <color name="home_color">#F1A5A5</color>
+    <color name="explore_color">#87EAC7</color>
+    <color name="manga_color">#63E5EA</color>
+    <color name="Profile_color">#C388F8</color>
+</resources>
