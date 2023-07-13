@@ -53,11 +53,11 @@
                     app:iss_period="1000"
                     app:iss_text_align="CENTER" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img6" />
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/img6" />-->
 
             </androidx.cardview.widget.CardView>
 
