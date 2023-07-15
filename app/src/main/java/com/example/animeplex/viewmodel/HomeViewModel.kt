@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.animeplex.data.Anime
+import com.example.animeplex.data.AnimeData
 import com.example.animeplex.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,6 +14,7 @@ import retrofit2.Response
 class HomeViewModel(): ViewModel() {
 
     private var featuredAnimeLiveData = MutableLiveData<Anime>()
+    private var topAnimeLiveData = MutableLiveData<Anime>()
 
     fun getFeaturedAnime() {
 
@@ -31,6 +33,25 @@ class HomeViewModel(): ViewModel() {
 
     fun observeFeaturedAnimeLiveData(): LiveData<Anime> {
         return featuredAnimeLiveData
+    }
+
+    fun getTopAnime() {
+
+        RetrofitInstance.api.getTopAnime().enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    topAnimeLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Home Fragment", t.message.toString())
+            }
+        })
+    }
+
+    fun observeTopAnimeLiveData(): LiveData<Anime> {
+        return topAnimeLiveData
     }
 
 }

@@ -25,7 +25,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -38,8 +39,8 @@
                 android:id="@+id/slideShow_home"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:cardCornerRadius="5dp"
                 android:layout_margin="10dp"
+                app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -49,23 +50,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:iss_auto_cycle="true"
-                    app:iss_delay="1000"
-                    app:iss_period="1000"
+                    app:iss_delay="3000"
+                    app:iss_period="3000"
                     app:iss_text_align="CENTER" />
 
-<!--                <ImageView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:scaleType="centerCrop"-->
-<!--                    android:src="@drawable/img6" />-->
+                <!--                <ImageView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:scaleType="centerCrop"-->
+                <!--                    android:src="@drawable/img6" />-->
 
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_category_home"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="0dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/slideShow_home"
@@ -87,16 +89,17 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
+                android:contentDescription="@string/top_anime"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="@+id/topAnime_home"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/topAnime_home"
-                android:contentDescription="@string/top_anime" />
+                app:layout_constraintTop_toTopOf="@+id/topAnime_home" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_topAnime_home"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="170dp"
+                android:layout_marginStart="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topAnime_home"
@@ -118,16 +121,17 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
+                android:contentDescription="@string/my_list"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="@+id/myList_home"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/myList_home"
-                android:contentDescription="@string/my_list" />
+                app:layout_constraintTop_toTopOf="@+id/myList_home" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_myList_home"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="170dp"
+                android:layout_marginStart="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/myList_home"
@@ -149,16 +153,17 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
+                android:contentDescription="@string/top_mangas"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="@+id/topManga_home"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/topManga_home"
-                android:contentDescription="@string/top_mangas" />
+                app:layout_constraintTop_toTopOf="@+id/topManga_home" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_topManga_home"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="170dp"
+                android:layout_marginStart="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topManga_home"
@@ -180,16 +185,17 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
+                android:contentDescription="@string/up_coming_anime"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="@+id/upComing_home"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/upComing_home"
-                android:contentDescription="@string/up_coming_anime" />
+                app:layout_constraintTop_toTopOf="@+id/upComing_home" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_upComing_home"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="170dp"
+                android:layout_marginStart="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/upComing_home"

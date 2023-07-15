@@ -10,6 +10,8 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.animeplex.R
 import com.example.animeplex.adapter.CategoryAdapter
+import com.example.animeplex.adapter.TopAnimeAdapter
+import com.example.animeplex.data.AnimeData
 import com.example.animeplex.data.CategoryHome
 import com.example.animeplex.databinding.FragmentHomeBinding
 import com.example.animeplex.ui.MainActivity
@@ -22,6 +24,9 @@ class HomeFragment : Fragment() {
 
     lateinit var categoryAdapter: CategoryAdapter
     private val categoryList = ArrayList<CategoryHome>()
+
+    lateinit var topAnimeAdapter: TopAnimeAdapter
+    private val topAnimeList = ArrayList<AnimeData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +47,20 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Featured Anime
         viewModel.getFeaturedAnime()
         observeFeaturedAnime()
 
+        // Category List
         prepareCategoryRecyclerView()
         createCategoryList()
         categoryAdapter.setCategoryList(categoryList)
+
+        // Top Anime
+        viewModel.getTopAnime()
+        prepareTopAnimeRecyclerView()
+        observeTopAnimeLiveData()
+
     }
 
     private fun createCategoryList() {
@@ -62,7 +75,7 @@ class HomeFragment : Fragment() {
     private fun prepareCategoryRecyclerView() {
         categoryAdapter = CategoryAdapter()
         binding.rvCategoryHome.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
         }
     }
@@ -70,11 +83,26 @@ class HomeFragment : Fragment() {
     private fun observeFeaturedAnime() {
         viewModel.observeFeaturedAnimeLiveData().observe(viewLifecycleOwner){
             val imageList = ArrayList<SlideModel>()
-            imageList.add(SlideModel(it.data[0].images.jpg.image_url))
-            imageList.add(SlideModel(it.data[1].images.jpg.image_url))
-            imageList.add(SlideModel(it.data[2].images.jpg.image_url))
+            imageList.add(SlideModel(it.data[0].images.jpg.large_image_url))
+            imageList.add(SlideModel(it.data[1].images.jpg.large_image_url))
+            imageList.add(SlideModel(it.data[2].images.jpg.large_image_url))
 
             binding.imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
+        }
+    }
+
+
+    private fun prepareTopAnimeRecyclerView() {
+        topAnimeAdapter = TopAnimeAdapter()
+        binding.rvTopAnimeHome.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = topAnimeAdapter
+        }
+    }
+
+    private fun observeTopAnimeLiveData() {
+        viewModel.observeTopAnimeLiveData().observe(viewLifecycleOwner){
+            topAnimeAdapter.setTopAnimeList(it.data)
         }
     }
 }
