@@ -57,4 +57,21 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="categories">Categories</string>
+    <string name="anime_image">Anime Image</string>
+    <string name="play">Play</string>
+    <string name="share">Share</string>
+    <string name="anime_name">Anime Name</string>
+    <string name="action_drama">Action | Drama</string>
+    <string name="rating">Rating</string>
+    <string name="year">Year</string>
+    <string name="_2000">2000</string>
+    <string name="episodes">Episodes</string>
+    <string name="_12">12</string>
+    <string name="duration">Duration</string>
+    <string name="_23_min">23 min</string>
+    <string name="characters">Characters</string>
+    <string name="attack_on_titan">Attack On Titan</string>
+    <string name="image">Image</string>
+    <string name="similar_anime">Similar Anime</string>
 </resources>

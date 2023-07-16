@@ -106,18 +106,14 @@ class HomeFragment : Fragment() {
             2500
         )
 
+        binding.testBtn.setOnClickListener {
+            val intoCategory = Intent(activity, DetailActivity::class.java)
+            startActivity(intoCategory)
+        }
+
     }
 
     // Featured Anime
-    private fun createCategoryList() {
-
-        categoryList.add(CategoryHome(R.drawable.action, "Action"))
-        categoryList.add(CategoryHome(R.drawable.adv, "Adventure"))
-        categoryList.add(CategoryHome(R.drawable.comedy, "Comedy"))
-        categoryList.add(CategoryHome(R.drawable.drama, "Drama"))
-        categoryList.add(CategoryHome(R.drawable.fantasy, "Fantasy"))
-    }
-
     private fun observeFeaturedAnime() {
         viewModel.observeFeaturedAnimeLiveData().observe(viewLifecycleOwner){
 
@@ -150,6 +146,15 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
         }
+    }
+
+    private fun createCategoryList() {
+
+        categoryList.add(CategoryHome(1, R.drawable.action, "Action"))
+        categoryList.add(CategoryHome(2, R.drawable.adv, "Adventure"))
+        categoryList.add(CategoryHome(4, R.drawable.comedy, "Comedy"))
+        categoryList.add(CategoryHome(8, R.drawable.drama, "Drama"))
+        categoryList.add(CategoryHome(10, R.drawable.fantasy, "Fantasy"))
     }
 
     private fun onCategoryItemClick() {

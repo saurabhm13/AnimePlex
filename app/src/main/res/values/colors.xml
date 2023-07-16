@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#8F8C8C</color>
 
     // Menu colors
     <color name="home_color">#F1A5A5</color>
@@ -10,4 +11,6 @@
     <color name="Profile_color">#C388F8</color>
 
     <color name="catg_bag_color">#B5AE2330</color>
+
+    <color name="red">#E81A1A</color>
 </resources>

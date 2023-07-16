@@ -88,6 +88,7 @@
                 android:id="@+id/topAnimeMore_home"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                style="@style/Icon"
                 android:layout_marginEnd="10dp"
                 android:contentDescription="@string/top_anime"
                 android:src="@drawable/ic_arrow_right"
@@ -120,6 +121,7 @@
                 android:id="@+id/myListMore_home"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                style="@style/Icon"
                 android:layout_marginEnd="10dp"
                 android:contentDescription="@string/my_list"
                 android:src="@drawable/ic_arrow_right"
@@ -152,6 +154,7 @@
                 android:id="@+id/topMangaMore_home"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                style="@style/Icon"
                 android:layout_marginEnd="10dp"
                 android:contentDescription="@string/top_mangas"
                 android:src="@drawable/ic_arrow_right"
@@ -184,6 +187,7 @@
                 android:id="@+id/upComingMore_home"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                style="@style/Icon"
                 android:layout_marginEnd="10dp"
                 android:contentDescription="@string/up_coming_anime"
                 android:src="@drawable/ic_arrow_right"
@@ -200,6 +204,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/upComing_home"
                 tools:listitem="@layout/anime_item" />
+
+            <Button
+                android:id="@+id/test_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
