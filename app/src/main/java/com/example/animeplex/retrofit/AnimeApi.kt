@@ -20,4 +20,13 @@ interface AnimeApi {
     @GET("top/anime")
     fun getTopAnime(): Call<Anime>
 
+    @GET("top/manga")
+    fun getTopManga(): Call<Anime>
+
+    @GET("anime")
+    fun getUpcomingAnime(
+        @Query("status") status: String,
+        @Query("order_by") orderBy: String
+    ): Call<Anime>
+
 }

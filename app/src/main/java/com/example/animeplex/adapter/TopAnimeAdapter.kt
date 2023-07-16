@@ -3,20 +3,19 @@ package com.example.animeplex.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.animeplex.data.AnimeData
 import com.example.animeplex.databinding.AnimeItemBinding
-import kotlin.contracts.contract
 
 class TopAnimeAdapter(): RecyclerView.Adapter<TopAnimeAdapter.TopAnimeViewHolder>() {
 
     private var topAnimeList = ArrayList<AnimeData>()
-
+    lateinit var onItemClick: ((AnimeData) -> Unit)
 
     @SuppressLint("NotifyDataSetChanged")
     fun setTopAnimeList(animeList: List<AnimeData>){
+        topAnimeList.clear()
         this.topAnimeList = animeList as ArrayList<AnimeData>
         notifyDataSetChanged()
     }
@@ -36,6 +35,10 @@ class TopAnimeAdapter(): RecyclerView.Adapter<TopAnimeAdapter.TopAnimeViewHolder
         Glide.with(holder.itemView)
             .load(topAnimeList[position].images.jpg.large_image_url)
             .into(holder.binding.imgAnime)
+
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(topAnimeList[position])
+        }
     }
 
 }

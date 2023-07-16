@@ -1,15 +1,13 @@
-package com.example.animeplex.ui
+package com.example.animeplex.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.animeplex.R
 import com.example.animeplex.viewmodel.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 class MainActivity : AppCompatActivity() {
 

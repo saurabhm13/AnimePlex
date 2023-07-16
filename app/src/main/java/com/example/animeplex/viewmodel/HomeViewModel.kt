@@ -15,7 +15,10 @@ class HomeViewModel(): ViewModel() {
 
     private var featuredAnimeLiveData = MutableLiveData<Anime>()
     private var topAnimeLiveData = MutableLiveData<Anime>()
+    private var topMangaLiveData = MutableLiveData<Anime>()
+    private var upcomingAnimeLiveData = MutableLiveData<Anime>()
 
+    // Featured Images
     fun getFeaturedAnime() {
 
         RetrofitInstance.api.getFeaturedAnime("3", "airing", "popularity", "asc").enqueue(object : Callback<Anime>{
@@ -35,6 +38,7 @@ class HomeViewModel(): ViewModel() {
         return featuredAnimeLiveData
     }
 
+    // Top Anime
     fun getTopAnime() {
 
         RetrofitInstance.api.getTopAnime().enqueue(object : Callback<Anime>{
@@ -54,4 +58,44 @@ class HomeViewModel(): ViewModel() {
         return topAnimeLiveData
     }
 
+    // Top Manga
+    fun getTopManga() {
+
+        RetrofitInstance.api.getTopManga().enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    topMangaLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Home Fragment", t.message.toString())
+            }
+        })
+    }
+
+    fun observeTopMangaLiveData(): LiveData<Anime>{
+        return topMangaLiveData
+    }
+
+    // Upcoming Anime
+    fun getUpcomingAnime() {
+
+        RetrofitInstance.api.getUpcomingAnime("airing", "popularity").enqueue(object : Callback<Anime> {
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    upcomingAnimeLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Home Fragment", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeUpcomingAnimeLiveData(): LiveData<Anime>{
+        return upcomingAnimeLiveData
+    }
 }
