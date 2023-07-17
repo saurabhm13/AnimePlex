@@ -24,7 +24,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgAnime"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:contentDescription="@string/anime_image"
@@ -35,30 +35,31 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage_newTweet"
+        android:id="@+id/play_trailer_bag"
         style="@style/ImageBorder"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@color/gray"
         app:civ_border_width="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/imgAnime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgAnime" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/play_trailer"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/play"
         android:src="@drawable/ic_play"
-        app:layout_constraintBottom_toBottomOf="@+id/profileImage_newTweet"
-        app:layout_constraintEnd_toEndOf="@+id/profileImage_newTweet"
-        app:layout_constraintStart_toStartOf="@+id/profileImage_newTweet"
-        app:layout_constraintTop_toTopOf="@+id/profileImage_newTweet"
+        app:layout_constraintBottom_toBottomOf="@+id/play_trailer_bag"
+        app:layout_constraintEnd_toEndOf="@+id/play_trailer_bag"
+        app:layout_constraintStart_toStartOf="@+id/play_trailer_bag"
+        app:layout_constraintTop_toTopOf="@+id/play_trailer_bag"
         app:tint="@color/red" />
 
     <ImageView
+        android:id="@+id/addToList_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -66,10 +67,11 @@
         style="@style/Icon"
         android:src="@drawable/ic_add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imgAnime"
         android:contentDescription="@string/my_list" />
 
     <ImageView
+        android:id="@+id/share_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -77,7 +79,7 @@
         android:src="@drawable/ic_share"
         style="@style/Icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imgAnime"
         android:contentDescription="@string/share" />
 
     <ScrollView
@@ -86,7 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage_newTweet">
+        app:layout_constraintTop_toBottomOf="@+id/play_trailer_bag">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -94,7 +96,7 @@
             >
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/name"
                 style="@style/SecondaryText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -108,19 +110,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/category"
                 style="@style/QuaternaryText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:text="@string/action_drama"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -130,7 +131,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
+                app:layout_constraintTop_toBottomOf="@+id/category">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -194,6 +195,7 @@
                         android:textAlignment="center" />
 
                     <TextView
+                        android:id="@+id/year"
                         style="@style/TertiaryText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -217,6 +219,7 @@
                         android:textAlignment="center" />
 
                     <TextView
+                        android:id="@+id/episode"
                         style="@style/TertiaryText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -240,6 +243,7 @@
                         android:textAlignment="center" />
 
                     <TextView
+                        android:id="@+id/duration"
                         style="@style/TertiaryText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -252,6 +256,20 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/QuaternaryText"
+                android:textAlignment="center"
+                android:text="iusdfh dshf isusdjn vsjdbviwurhf sjdv ls bvlsfjb iuphf snv sfkvlsabfbv piu"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout2"/>
+
+            <TextView
                 android:id="@+id/character_detail"
                 style="@style/SecondaryText"
                 android:layout_width="wrap_content"
@@ -260,7 +278,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/characters"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+                app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <ImageView
                 android:id="@+id/characterMore_detail"
@@ -282,7 +300,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_detail"
-                tools:listitem="@layout/anime_item" />
+                tools:listitem="@layout/character_item2_list" />
 
             <TextView
                 android:id="@+id/similarAnime_detail"

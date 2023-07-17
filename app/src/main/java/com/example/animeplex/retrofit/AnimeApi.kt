@@ -2,8 +2,10 @@ package com.example.animeplex.retrofit
 
 import com.example.animeplex.data.Anime
 import com.example.animeplex.data.AnimeData
+import com.example.animeplex.data.AnimeDetail
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AnimeApi {
@@ -28,5 +30,10 @@ interface AnimeApi {
         @Query("status") status: String,
         @Query("order_by") orderBy: String
     ): Call<Anime>
+
+    @GET("anime/{id}")
+    fun getAnimeDetail(
+        @Path("id", encoded = true) id: Int
+    ): Call<AnimeDetail>
 
 }

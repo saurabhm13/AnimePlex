@@ -183,7 +183,7 @@ class HomeFragment : Fragment() {
     private fun onTopAnimeItemClick() {
         topAnimeAdapter.onItemClick = {
             val inToDetails = Intent(activity, DetailActivity::class.java)
-            inToDetails.putExtra("id", it.mal_id)
+            inToDetails.putExtra("id", it.mal_id.toString())
             startActivity(inToDetails)
         }
     }
@@ -206,7 +206,7 @@ class HomeFragment : Fragment() {
     private fun onTopMangaItemClick() {
         topMangaAdapter.onItemClick = {
             val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id)
+            intoDetail.putExtra("id", it.mal_id.toString())
             startActivity(intoDetail)
         }
     }
@@ -229,7 +229,7 @@ class HomeFragment : Fragment() {
     private fun onUpcomingAnimeItemClick() {
         upcomingAnimeAdapter.onItemClick = {
             val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id)
+            intoDetail.putExtra("id", it.mal_id.toString())
             startActivity(intoDetail)
         }
     }
