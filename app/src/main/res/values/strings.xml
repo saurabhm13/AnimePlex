@@ -74,4 +74,6 @@
     <string name="attack_on_titan">Attack On Titan</string>
     <string name="image">Image</string>
     <string name="similar_anime">Similar Anime</string>
+    <string name="more">More</string>
+    <string name="anime_movies">Anime Movies</string>
 </resources>
