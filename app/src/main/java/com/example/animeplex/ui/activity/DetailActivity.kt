@@ -4,10 +4,14 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.animeplex.R
+import com.example.animeplex.adapter.CharacterAnimeDetailAdapter
 import com.example.animeplex.databinding.ActivityDetailBinding
 import com.example.animeplex.viewmodel.AnimeDetailViewModel
+import com.example.animeplex.viewmodel.CharactersViewModel
 
 class DetailActivity : AppCompatActivity() {
 
@@ -15,6 +19,9 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: AnimeDetailViewModel
     private lateinit var id: String
+
+    private var characterViewModel = CharactersViewModel()
+    lateinit var characterAdapter: CharacterAnimeDetailAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +34,12 @@ class DetailActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this)[AnimeDetailViewModel::class.java]
 
 
-
+        viewModel.getAnimeDetail(id.toInt())
         observeAnimeDetailLiveData()
 
-        viewModel.getAnimeDetail(id.toInt())
+        characterViewModel.getCharacters(id.toInt())
+        prepareCharacterRecyclerView()
+        observeCharacterLiveData()
 
 
     }
@@ -72,5 +81,21 @@ class DetailActivity : AppCompatActivity() {
         val regex = Regex("""\d+""")
         val matchResult = regex.find(input)
         return matchResult?.value?.toIntOrNull()
+    }
+
+    // Characters
+    private fun prepareCharacterRecyclerView() {
+        characterAdapter = CharacterAnimeDetailAdapter()
+        binding.rvCharactersDetails.apply {
+            layoutManager = LinearLayoutManager(this@DetailActivity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = characterAdapter
+        }
+    }
+
+    private fun observeCharacterLiveData() {
+
+        characterViewModel.observeCharacterLiveData().observe(this) {
+            characterAdapter.setCharacterList(it.data)
+        }
     }
 }

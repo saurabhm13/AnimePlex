@@ -3,6 +3,7 @@ package com.example.animeplex.retrofit
 import com.example.animeplex.data.Anime
 import com.example.animeplex.data.AnimeData
 import com.example.animeplex.data.AnimeDetail
+import com.example.animeplex.data.Characters
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -35,5 +36,10 @@ interface AnimeApi {
     fun getAnimeDetail(
         @Path("id", encoded = true) id: Int
     ): Call<AnimeDetail>
+
+    @GET("anime/{id}/characters")
+    fun getCharactersDetail(
+        @Path("id", encoded = true) id: Int
+    ): Call<Characters>
 
 }

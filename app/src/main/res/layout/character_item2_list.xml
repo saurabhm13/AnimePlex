@@ -11,7 +11,7 @@
         android:layout_width="180dp"
         android:layout_height="125dp"
         android:src="@drawable/img5"
-        android:scaleType="centerCrop"
+        android:scaleType="matrix"
         android:contentDescription="@string/anime" />
 
 </androidx.cardview.widget.CardView>
