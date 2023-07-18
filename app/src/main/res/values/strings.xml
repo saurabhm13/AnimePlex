@@ -76,4 +76,12 @@
     <string name="similar_anime">Similar Anime</string>
     <string name="more">More</string>
     <string name="anime_movies">Anime Movies</string>
+    <string name="movies">Movies</string>
+    <string name="action_anime">Action Anime</string>
+    <string name="award_winning">Award Winning</string>
+    <string name="more_like_this">More Like This</string>
+    <string name="name">Name</string>
+    <string name="cover_image">Cover Image</string>
+    <string name="my_anime_list">My Anime List</string>
+    <string name="my_manga_list">My Manga List</string>
 </resources>

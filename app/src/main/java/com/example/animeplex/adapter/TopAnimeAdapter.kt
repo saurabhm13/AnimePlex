@@ -16,7 +16,7 @@ class TopAnimeAdapter(): RecyclerView.Adapter<TopAnimeAdapter.TopAnimeViewHolder
     @SuppressLint("NotifyDataSetChanged")
     fun setTopAnimeList(animeList: List<AnimeData>){
         topAnimeList.clear()
-        this.topAnimeList = animeList as ArrayList<AnimeData>
+        topAnimeList.addAll(animeList)
         notifyDataSetChanged()
     }
 

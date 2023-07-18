@@ -48,4 +48,15 @@ interface AnimeApi {
         @Path("id", encoded = true)id: Int
     ): Call<SimilarAnime>
 
+    @GET("anime")
+    fun getMovieAnime(
+        @Query("type") type: String,
+        @Query("order_by") orderBy: String
+    ): Call<Anime>
+
+    @GET("anime")
+    fun getAnimeByCategory(
+        @Query("genres") genres: Int
+    ): Call<Anime>
+
 }

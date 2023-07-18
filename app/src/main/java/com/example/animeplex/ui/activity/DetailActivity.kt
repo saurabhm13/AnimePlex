@@ -41,6 +41,7 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel.getAnimeDetail(id.toInt())
         observeAnimeDetailLiveData()
+        onDescriptionClick()
 
         characterViewModel.getCharacters(id.toInt())
         prepareCharacterRecyclerView()
@@ -82,6 +83,19 @@ class DetailActivity : AppCompatActivity() {
 
             binding.duration.text = extractNumberFromString(it.data.duration).toString() + " min"
             binding.description.text = it.data.synopsis
+
+        }
+    }
+
+    private fun onDescriptionClick() {
+
+        binding.description.setOnClickListener {
+
+            if (binding.description.maxLines == 8){
+                binding.description.maxLines = Int.MAX_VALUE
+            }else {
+                binding.description.maxLines = 8
+            }
 
         }
     }

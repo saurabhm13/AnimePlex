@@ -85,6 +85,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +102,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:text="@string/anime_name"
                 android:textAlignment="center"
@@ -261,7 +262,9 @@
                 android:layout_height="wrap_content"
                 style="@style/QuaternaryText"
                 android:textAlignment="center"
-                android:text="iusdfh dshf isusdjn vsjdbviwurhf sjdv ls bvlsfjb iuphf snv sfkvlsabfbv piu"
+                android:text="iusdfh dshf isusdjn slkdj fksdfblsdkf lsdf blsdf lafsdvb,msdnv asjhdf lksdjvb s.nvljahsb fjsdbvsafvb lasbf basdjkvsa.nfb vsajlhfvg iawu fa;dn ksdjsdblahffgwqufh lw nvskfbgpeiwruuhf wIEDFN ;FJF B LEIG LSDGF KSBF LSADFOIWU SJHD LSDVJSKAHVFAWOI KDsldbhf sakfgqw ds b fsjkldagfaowu sdb;;aoisdfh sdvnsdakbvl;owifh scvbn slakfjvba;asoidhff skjcvbsakfjbvapiuvhh ;saddhfawuofha wdosvsavlkbvas;udfh q;osdnvkasbaosidhf osskbjv;ajksdbhv psauffw vsjdbviwurhf sjdv ls bvlsfjb iuphf snv sfkvlsabfbv piu"
+                android:maxLines="8"
+                android:ellipsize="end"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="18dp"
@@ -309,7 +312,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
-                android:text="@string/similar_anime"
+                android:text="@string/more_like_this"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_characters_details" />
 
