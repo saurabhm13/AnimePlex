@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.animeplex.R
+import com.example.animeplex.adapter.AnimeAdapter
 import com.example.animeplex.adapter.CategoryAdapter
+import com.example.animeplex.adapter.MyAnimeListAdapter
 import com.example.animeplex.adapter.TopAnimeAdapter
 import com.example.animeplex.adapter.TopMangaAdapter
 import com.example.animeplex.adapter.UpcomingAnimeAdapter
@@ -34,12 +37,7 @@ class HomeFragment : Fragment() {
     lateinit var categoryAdapter: CategoryAdapter
     private val categoryList = ArrayList<CategoryHome>()
 
-    lateinit var topAnimeAdapter: TopAnimeAdapter
-    private val topAnimeList = ArrayList<AnimeData>()
-
-    lateinit var topMangaAdapter: TopMangaAdapter
-
-    lateinit var upcomingAnimeAdapter: UpcomingAnimeAdapter
+    private lateinit var myAnimeListAdapter: MyAnimeListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +69,8 @@ class HomeFragment : Fragment() {
         categoryAdapter.setCategoryList(categoryList)
         onCategoryItemClick()
 
-        // Top Anime
-        viewModel.getTopAnime()
-        prepareTopAnimeRecyclerView()
-        observeTopAnimeLiveData()
-        onTopAnimeItemClick()
+        // My Anime List
+        prepareMyAnimeListRecyclerView()
 
 
         // Using delay of 2 sec for Upcoming anime because api handles 3 request/sec
@@ -84,11 +79,13 @@ class HomeFragment : Fragment() {
         handler.postDelayed(
             Runnable {
 
+                // Top Anime
+                viewModel.getTopAnime()
+                prepareTopAnimeRecyclerView()
+
                 // Top Manga
                 viewModel.getTopManga()
                 prepareTopMangaRecyclerView()
-                observeTopMangaLiveData()
-                onTopMangaItemClick()
 
             },1000
         )
@@ -96,20 +93,12 @@ class HomeFragment : Fragment() {
         handler.postDelayed(
             Runnable {
 
-
                 // Upcoming Anime
                 viewModel.getUpcomingAnime()
                 prepareUpcomingAnimeRecyclerView()
-                observeUpcomingAnimeLiveData()
-                onUpcomingAnimeItemClick()
             },
             2500
         )
-
-//        binding.testBtn.setOnClickListener {
-//            val intoCategory = Intent(activity, DetailActivity::class.java)
-//            startActivity(intoCategory)
-//        }
 
     }
 
@@ -167,70 +156,77 @@ class HomeFragment : Fragment() {
 
     // Top Anime
     private fun prepareTopAnimeRecyclerView() {
-        topAnimeAdapter = TopAnimeAdapter()
-        binding.rvTopAnimeHome.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = topAnimeAdapter
-        }
-    }
 
-    private fun observeTopAnimeLiveData() {
-        viewModel.observeTopAnimeLiveData().observe(viewLifecycleOwner){
-            topAnimeAdapter.setTopAnimeList(it.data)
-        }
-    }
-
-    private fun onTopAnimeItemClick() {
-        topAnimeAdapter.onItemClick = {
+        val animeAdapter = AnimeAdapter {
             val inToDetails = Intent(activity, DetailActivity::class.java)
             inToDetails.putExtra("id", it.mal_id.toString())
             startActivity(inToDetails)
+        }
+
+        binding.rvTopAnimeHome.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = animeAdapter
+        }
+
+        viewModel.observeTopAnimeLiveData().observe(viewLifecycleOwner) {
+            animeAdapter.setTopAnimeList(it.data)
         }
     }
 
     // Top Manga
     private fun prepareTopMangaRecyclerView(){
-        topMangaAdapter = TopMangaAdapter()
+
+        val animeAdapter = AnimeAdapter {
+            val inToDetails = Intent(activity, DetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            startActivity(inToDetails)
+        }
+
         binding.rvTopMangaHome.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = topMangaAdapter
+            adapter = animeAdapter
         }
-    }
 
-    private fun observeTopMangaLiveData(){
-        viewModel.observeTopMangaLiveData().observe(viewLifecycleOwner){
-            topMangaAdapter.setTopMangaList(it.data)
-        }
-    }
-
-    private fun onTopMangaItemClick() {
-        topMangaAdapter.onItemClick = {
-            val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+        viewModel.observeTopMangaLiveData().observe(viewLifecycleOwner) {
+            animeAdapter.setTopAnimeList(it.data)
         }
     }
 
     // Upcoming Anime
     private fun prepareUpcomingAnimeRecyclerView() {
-        upcomingAnimeAdapter = UpcomingAnimeAdapter()
+
+        val animeAdapter = AnimeAdapter {
+            val inToDetails = Intent(activity, DetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            startActivity(inToDetails)
+        }
+
         binding.rvUpComingHome.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = upcomingAnimeAdapter
+            adapter = animeAdapter
+        }
+
+        viewModel.observeUpcomingAnimeLiveData().observe(viewLifecycleOwner) {
+            animeAdapter.setTopAnimeList(it.data)
         }
     }
 
-    private fun observeUpcomingAnimeLiveData() {
-        viewModel.observeUpcomingAnimeLiveData().observe(viewLifecycleOwner){
-            upcomingAnimeAdapter.setUpcomingAnime(it.data)
-        }
-    }
+    // My Anime List
+    private fun prepareMyAnimeListRecyclerView() {
 
-    private fun onUpcomingAnimeItemClick() {
-        upcomingAnimeAdapter.onItemClick = {
-            val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+        myAnimeListAdapter = MyAnimeListAdapter {
+            val inToDetails = Intent(activity, DetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            startActivity(inToDetails)
+        }
+
+        binding.rvMyListHome.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = myAnimeListAdapter
+        }
+
+        viewModel.observeMyAnimeListLiveData().observe(viewLifecycleOwner) {
+            myAnimeListAdapter.setMyAnimeList(it)
         }
     }
 }
