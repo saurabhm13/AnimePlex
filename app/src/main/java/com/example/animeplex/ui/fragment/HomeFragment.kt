@@ -106,10 +106,10 @@ class HomeFragment : Fragment() {
             2500
         )
 
-        binding.testBtn.setOnClickListener {
-            val intoCategory = Intent(activity, DetailActivity::class.java)
-            startActivity(intoCategory)
-        }
+//        binding.testBtn.setOnClickListener {
+//            val intoCategory = Intent(activity, DetailActivity::class.java)
+//            startActivity(intoCategory)
+//        }
 
     }
 

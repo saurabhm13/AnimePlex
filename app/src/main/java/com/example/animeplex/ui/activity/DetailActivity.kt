@@ -4,14 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.animeplex.adapter.CharacterAnimeDetailAdapter
 import com.example.animeplex.adapter.SimilarAnimeAdapter
-import com.example.animeplex.adapter.TopAnimeAdapter
+import com.example.animeplex.data.AnimeDataToSave
 import com.example.animeplex.databinding.ActivityDetailBinding
+import com.example.animeplex.db.AnimeDatabase
 import com.example.animeplex.viewmodel.AnimeDetailViewModel
+import com.example.animeplex.viewmodel.AnimeViewModelFactory
 import com.example.animeplex.viewmodel.CharactersViewModel
 import com.example.animeplex.viewmodel.SimilarAnimeViewModel
 
@@ -36,7 +39,10 @@ class DetailActivity : AppCompatActivity() {
         val intent = intent
         id = intent.getStringExtra("id")!!
 
-        viewModel = ViewModelProviders.of(this)[AnimeDetailViewModel::class.java]
+        val animeDatabase = AnimeDatabase.getInstance(this)
+        val animeViewModelFactory = AnimeViewModelFactory(animeDatabase)
+
+        viewModel = ViewModelProvider(this, animeViewModelFactory)[AnimeDetailViewModel::class.java]
 
 
         viewModel.getAnimeDetail(id.toInt())
@@ -52,12 +58,27 @@ class DetailActivity : AppCompatActivity() {
         observeSimilarAnimeLiveData()
         onSimilarAnimeClick()
 
+        onAddToListClick()
+
     }
+
+    private var animeToSave: AnimeDataToSave? = null
+    private var mal_id: Int? = null
+    private var title: String? = null
+    private var image: String? = null
+
 
     @SuppressLint("SetTextI18n")
     private fun observeAnimeDetailLiveData() {
 
         viewModel.observeAnimeDetailLiveData().observe(this) {
+
+            mal_id = it.data.mal_id
+            title = it.data.title
+            image = it.data.images.jpg.large_image_url
+
+            animeToSave = AnimeDataToSave(mal_id!!, title!!, image!!)
+
 
             Glide.with(this)
                 .load(it.data.images.jpg.large_image_url)
@@ -81,8 +102,9 @@ class DetailActivity : AppCompatActivity() {
             binding.year.text = it.data.year.toString()
             binding.episode.text = it.data.episodes.toString()
 
-            binding.duration.text = extractNumberFromString(it.data.duration).toString() + " min"
+            binding.duration.text = it.data.duration.let { it1 -> extractNumberFromString(it1).toString() } + " min"
             binding.description.text = it.data.synopsis
+            binding.ratingBar.rating = it.data.score.toFloat()
 
         }
     }
@@ -145,4 +167,21 @@ class DetailActivity : AppCompatActivity() {
             startActivity(inToDetails)
         }
     }
+
+    private fun onAddToListClick() {
+
+//        animeToSave?.mal_id ?:
+//
+//        animeToSave.let {
+//            viewModel.addAnimeToList(it!!)
+//        }
+
+        binding.addToListImg.setOnClickListener {
+            animeToSave.let {
+                viewModel.addAnimeToListFromAddIcon(it!!)
+                Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
 }

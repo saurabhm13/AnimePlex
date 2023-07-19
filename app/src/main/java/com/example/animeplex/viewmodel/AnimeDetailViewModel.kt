@@ -4,9 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.animeplex.data.Anime
-import com.example.animeplex.data.AnimeData
+import androidx.lifecycle.viewModelScope
+import com.example.animeplex.data.AnimeDataToSave
 import com.example.animeplex.data.AnimeDetail
+import com.example.animeplex.db.AnimeDatabase
 import com.example.animeplex.retrofit.RetrofitInstance
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AnimeDetailViewModel(): ViewModel() {
+class AnimeDetailViewModel(
+    private val animeDatabase: AnimeDatabase
+): ViewModel() {
 
 
     private var animeDetailLiveData = MutableLiveData<AnimeDetail>()
@@ -45,22 +48,17 @@ class AnimeDetailViewModel(): ViewModel() {
             }
         }
 
-//        RetrofitInstance.api.getAnimeDetail(21).enqueue(object : Callback<AnimeData>{
-//            override fun onResponse(call: Call<AnimeData>, response: Response<AnimeData>) {
-//                if (response.body() != null){
-//                    animeDetailLiveData.value = response.body()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<AnimeData>, t: Throwable) {
-//                Log.d("Detail Activity", t.message.toString())
-//            }
-//
-//        })
+
     }
 
     fun observeAnimeDetailLiveData(): LiveData<AnimeDetail> {
         return animeDetailLiveData
+    }
+
+    fun addAnimeToListFromAddIcon(animeData: AnimeDataToSave) {
+        viewModelScope.launch {
+            animeDatabase.animeDao().upsert(animeData)
+        }
     }
 
 }

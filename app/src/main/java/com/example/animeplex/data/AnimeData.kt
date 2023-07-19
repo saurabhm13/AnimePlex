@@ -1,5 +1,9 @@
 package com.example.animeplex.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+//@Entity(tableName = "Anime Data")
 data class AnimeData(
     val aired: Aired,
     val airing: Boolean,
@@ -14,6 +18,7 @@ data class AnimeData(
     val genres: List<Genre>,
     val images: Images,
     val licensors: List<Licensor>,
+//    @PrimaryKey
     val mal_id: Int,
     val members: Int,
     val popularity: Int,

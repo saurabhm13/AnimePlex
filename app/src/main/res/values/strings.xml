@@ -84,4 +84,5 @@
     <string name="cover_image">Cover Image</string>
     <string name="my_anime_list">My Anime List</string>
     <string name="my_manga_list">My Manga List</string>
+    <string name="edit">Edit</string>
 </resources>
