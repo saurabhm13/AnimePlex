@@ -56,6 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_arrow_right"
+                    style="@style/Icon"
                     android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/animeMovie_explore"
@@ -74,18 +75,50 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_category_explore"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/category_items" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/categories_explore"
+                    style="@style/SecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/categories"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/categoryMore_explore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Icon"
+                    android:src="@drawable/ic_arrow_right"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/categories_explore"
+                    app:layout_constraintBottom_toBottomOf="@id/categories_explore"
+                    android:contentDescription="@string/more" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_category_explore"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/categories_explore"
+                    tools:listitem="@layout/category_items" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 >
 
                 <TextView
@@ -94,7 +127,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
                     android:text="@string/top_mangas"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -103,6 +135,7 @@
                     android:id="@+id/topMangaMore_explore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Icon"
                     android:src="@drawable/ic_arrow_right"
                     android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +158,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 >
 
                 <TextView
@@ -133,7 +167,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
                     android:text="@string/award_winning"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -142,6 +175,7 @@
                     android:id="@+id/awardWinningAnimeMore_explore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Icon"
                     android:src="@drawable/ic_arrow_right"
                     android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -164,6 +198,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 >
 
                 <TextView
@@ -171,6 +206,7 @@
                     style="@style/SecondaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="@string/top_anime"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -179,7 +215,9 @@
                     android:id="@+id/topAnimeMore_explore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Icon"
                     android:src="@drawable/ic_arrow_right"
+                    android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/topAnime_explore"
                     app:layout_constraintBottom_toBottomOf="@id/topAnime_explore"
@@ -200,6 +238,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 >
 
                 <TextView
@@ -207,6 +246,7 @@
                     style="@style/SecondaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="@string/action_anime"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -216,6 +256,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_arrow_right"
+                    style="@style/Icon"
+                    android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/actionAnime_explore"
                     app:layout_constraintBottom_toBottomOf="@id/actionAnime_explore"
@@ -236,6 +278,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 >
 
                 <TextView
@@ -243,6 +286,7 @@
                     style="@style/SecondaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="@string/up_coming_anime"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -251,7 +295,9 @@
                     android:id="@+id/upComingMore_explore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Icon"
                     android:src="@drawable/ic_arrow_right"
+                    android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/upComing_explore"
                     app:layout_constraintBottom_toBottomOf="@id/upComing_explore"
@@ -269,15 +315,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
         </LinearLayout>
 
-
-
     </ScrollView>
-
-
 
 </LinearLayout>

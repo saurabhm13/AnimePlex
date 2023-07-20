@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animeplex.data.AnimeDataToSave
 import com.example.animeplex.data.AnimeDetail
+import com.example.animeplex.data.Characters
+import com.example.animeplex.data.SimilarAnime
 import com.example.animeplex.db.AnimeDatabase
 import com.example.animeplex.retrofit.RetrofitInstance
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -23,6 +25,8 @@ class AnimeDetailViewModel(
 
 
     private var animeDetailLiveData = MutableLiveData<AnimeDetail>()
+    private var characterLiveData = MutableLiveData<Characters>()
+    private var similarAnimeLiveData = MutableLiveData<SimilarAnime>()
 
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -55,6 +59,69 @@ class AnimeDetailViewModel(
         return animeDetailLiveData
     }
 
+    // Characters
+    @OptIn(DelicateCoroutinesApi::class)
+    fun getCharacters(id: Int) {
+
+        GlobalScope.launch(Dispatchers.IO){
+
+            try {
+
+                RetrofitInstance.api.getCharactersDetail(id).enqueue(object : Callback<Characters>{
+                    override fun onResponse(call: Call<Characters>, response: Response<Characters>) {
+                        if (response.body() != null){
+                            characterLiveData.value = response.body()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Characters>, t: Throwable) {
+                        Log.d("Character", t.message.toString())
+                    }
+
+                })
+
+            }catch (e: Exception){
+                Log.d("Character", e.message.toString())
+            }
+        }
+
+    }
+
+    fun observeCharacterLiveData(): LiveData<Characters>{
+        return characterLiveData
+    }
+
+    // Similar Anime
+    @OptIn(DelicateCoroutinesApi::class)
+    fun getSimilarAnime(id: Int) {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                RetrofitInstance.api.getSimilarAnime(id).enqueue(object : Callback<SimilarAnime>{
+                    override fun onResponse(call: Call<SimilarAnime>, response: Response<SimilarAnime>) {
+                        if (response.body() != null){
+                            similarAnimeLiveData.value = response.body()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<SimilarAnime>, t: Throwable) {
+                        Log.d("Similar Anime", t.message.toString())
+                    }
+
+                })
+
+            }catch (e: Exception) {
+                Log.d("Similar Anime", e.message.toString())
+            }
+
+        }
+    }
+
+    fun observeSimilarAnimeLiveData(): LiveData<SimilarAnime> {
+        return similarAnimeLiveData
+    }
+
+    // Add To List
     fun addAnimeToListFromAddIcon(animeData: AnimeDataToSave) {
         viewModelScope.launch {
             animeDatabase.animeDao().upsert(animeData)

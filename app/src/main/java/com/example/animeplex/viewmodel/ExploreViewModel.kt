@@ -17,6 +17,7 @@ class ExploreViewModel(): ViewModel() {
 
     private var awardWinningAnimeLiveData = MutableLiveData<Anime>()
     private var actionAnimeLiveData = MutableLiveData<Anime>()
+    private var animeByCategoryLiveData = MutableLiveData<Anime>()
 
     fun getMovieAnime() {
 
@@ -76,6 +77,27 @@ class ExploreViewModel(): ViewModel() {
 
     fun observeActionAnimeLiveData(): LiveData<Anime> {
         return actionAnimeLiveData
+    }
+
+    fun getAnimeByCategory(genres: Int) {
+
+        RetrofitInstance.api.getAnimeByCategory(genres).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    animeByCategoryLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Award winning", t.message.toString())
+            }
+
+        })
+
+    }
+
+    fun observeAnimeByCategoryLiveData(): LiveData<Anime> {
+        return animeByCategoryLiveData
     }
 
 }

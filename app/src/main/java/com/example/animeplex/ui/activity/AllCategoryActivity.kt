@@ -83,8 +83,10 @@ class AllCategoryActivity : AppCompatActivity() {
 
     private fun onCategoryItemClick() {
         categoryAdapter.onItemClick = {
-            val intoAnimeList = Intent(this, AnimeListActivity::class.java)
-            startActivity(intoAnimeList)
+            val intoAnimeByCategory = Intent(this, AnimeListByCategoryActivity::class.java)
+            intoAnimeByCategory.putExtra("Category Id", it.id.toString())
+            intoAnimeByCategory.putExtra("Category Name", it.name)
+            startActivity(intoAnimeByCategory)
         }
     }
 }

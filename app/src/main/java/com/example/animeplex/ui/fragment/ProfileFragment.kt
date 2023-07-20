@@ -43,13 +43,13 @@ class ProfileFragment : Fragment() {
 
         prepareMyAnimeListRecyclerView()
 
-
+        deleteAndUndoMyAnimeList()
 
     }
 
     private fun prepareMyAnimeListRecyclerView() {
 
-        myAnimeListAdapter = MyAnimeListAdapter {
+        val myAnimeListAdapter = MyAnimeListAdapter {
             val inToDetails = Intent(activity, DetailActivity::class.java)
             inToDetails.putExtra("id", it.mal_id.toString())
             startActivity(inToDetails)
@@ -62,6 +62,13 @@ class ProfileFragment : Fragment() {
 
         homeViewModel.observeMyAnimeListLiveData().observe(viewLifecycleOwner) {
             myAnimeListAdapter.setMyAnimeList(it)
+        }
+    }
+
+    private fun deleteAndUndoMyAnimeList() {
+
+        val myAnimeListAdapter = MyAnimeListAdapter {
+
         }
     }
 

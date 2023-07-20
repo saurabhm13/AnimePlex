@@ -18,37 +18,37 @@ import retrofit2.Response
 class CharactersViewModel(): ViewModel() {
 
 
-    private var characterLiveData = MutableLiveData<Characters>()
+//    private var characterLiveData = MutableLiveData<Characters>()
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun getCharacters(id: Int) {
-
-        GlobalScope.launch(Dispatchers.IO){
-
-            try {
-
-                RetrofitInstance.api.getCharactersDetail(id).enqueue(object : Callback<Characters>{
-                    override fun onResponse(call: Call<Characters>, response: Response<Characters>) {
-                        if (response.body() != null){
-                            characterLiveData.value = response.body()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<Characters>, t: Throwable) {
-                        Log.d("Character", t.message.toString())
-                    }
-
-                })
-
-            }catch (e: Exception){
-                Log.d("Character", e.message.toString())
-            }
-        }
-
-    }
-
-    fun observeCharacterLiveData(): LiveData<Characters>{
-        return characterLiveData
-    }
+//    @OptIn(DelicateCoroutinesApi::class)
+//    fun getCharacters(id: Int) {
+//
+//        GlobalScope.launch(Dispatchers.IO){
+//
+//            try {
+//
+//                RetrofitInstance.api.getCharactersDetail(id).enqueue(object : Callback<Characters>{
+//                    override fun onResponse(call: Call<Characters>, response: Response<Characters>) {
+//                        if (response.body() != null){
+//                            characterLiveData.value = response.body()
+//                        }
+//                    }
+//
+//                    override fun onFailure(call: Call<Characters>, t: Throwable) {
+//                        Log.d("Character", t.message.toString())
+//                    }
+//
+//                })
+//
+//            }catch (e: Exception){
+//                Log.d("Character", e.message.toString())
+//            }
+//        }
+//
+//    }
+//
+//    fun observeCharacterLiveData(): LiveData<Characters>{
+//        return characterLiveData
+//    }
 
 }

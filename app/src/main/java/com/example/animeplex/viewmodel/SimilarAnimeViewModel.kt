@@ -17,35 +17,35 @@ import retrofit2.Response
 class SimilarAnimeViewModel(): ViewModel() {
 
 
-    private var similarAnimeLiveData = MutableLiveData<SimilarAnime>()
+//    private var similarAnimeLiveData = MutableLiveData<SimilarAnime>()
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun getSimilarAnime(id: Int) {
-
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                RetrofitInstance.api.getSimilarAnime(id).enqueue(object : Callback<SimilarAnime>{
-                    override fun onResponse(call: Call<SimilarAnime>, response: Response<SimilarAnime>) {
-                        if (response.body() != null){
-                            similarAnimeLiveData.value = response.body()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<SimilarAnime>, t: Throwable) {
-                        Log.d("Similar Anime", t.message.toString())
-                    }
-
-                })
-
-            }catch (e: Exception) {
-                Log.d("Similar Anime", e.message.toString())
-            }
-
-        }
-    }
-
-    fun observeSimilarAnimeLiveData(): LiveData<SimilarAnime> {
-        return similarAnimeLiveData
-    }
+//    @OptIn(DelicateCoroutinesApi::class)
+//    fun getSimilarAnime(id: Int) {
+//
+//        GlobalScope.launch(Dispatchers.IO) {
+//            try {
+//                RetrofitInstance.api.getSimilarAnime(id).enqueue(object : Callback<SimilarAnime>{
+//                    override fun onResponse(call: Call<SimilarAnime>, response: Response<SimilarAnime>) {
+//                        if (response.body() != null){
+//                            similarAnimeLiveData.value = response.body()
+//                        }
+//                    }
+//
+//                    override fun onFailure(call: Call<SimilarAnime>, t: Throwable) {
+//                        Log.d("Similar Anime", t.message.toString())
+//                    }
+//
+//                })
+//
+//            }catch (e: Exception) {
+//                Log.d("Similar Anime", e.message.toString())
+//            }
+//
+//        }
+//    }
+//
+//    fun observeSimilarAnimeLiveData(): LiveData<SimilarAnime> {
+//        return similarAnimeLiveData
+//    }
 
 }

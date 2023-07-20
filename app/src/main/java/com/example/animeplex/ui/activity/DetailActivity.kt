@@ -45,19 +45,25 @@ class DetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, animeViewModelFactory)[AnimeDetailViewModel::class.java]
 
 
+        // Anime Details
         viewModel.getAnimeDetail(id.toInt())
         observeAnimeDetailLiveData()
         onDescriptionClick()
 
-        characterViewModel.getCharacters(id.toInt())
+        // Characters
+        viewModel.getCharacters(id.toInt())
         prepareCharacterRecyclerView()
         observeCharacterLiveData()
+        onMoreCharacterClick()
 
-        similarAnimeViewModel.getSimilarAnime(id.toInt())
+        // Similar Anime
+        viewModel.getSimilarAnime(id.toInt())
         prepareSimilarAnimeRecyclerView()
         observeSimilarAnimeLiveData()
         onSimilarAnimeClick()
+        onMoreSimilarAnimeClick()
 
+        // Add To List
         onAddToListClick()
 
     }
@@ -139,14 +145,31 @@ class DetailActivity : AppCompatActivity() {
 
     private fun observeCharacterLiveData() {
 
-        characterViewModel.observeCharacterLiveData().observe(this) {
+        viewModel.observeCharacterLiveData().observe(this) {
             characterAdapter.setCharacterList(it.data)
         }
     }
 
+    private fun onMoreCharacterClick() {
+        binding.characterDetail.setOnClickListener {
+            val intoCharacterSimilarAnime = Intent(this, CharactersSimilarAnimeActivity::class.java)
+            intoCharacterSimilarAnime.putExtra("Type", "Character")
+            intoCharacterSimilarAnime.putExtra("Anime Id", mal_id.toString())
+            startActivity(intoCharacterSimilarAnime)
+        }
+
+        binding.characterMoreDetail.setOnClickListener {
+            val intoCharacterSimilarAnime = Intent(this, CharactersSimilarAnimeActivity::class.java)
+            intoCharacterSimilarAnime.putExtra("Type", "Character")
+            intoCharacterSimilarAnime.putExtra("Anime Id", mal_id.toString())
+            startActivity(intoCharacterSimilarAnime)
+        }
+
+    }
+
     // Similar Anime
     private fun prepareSimilarAnimeRecyclerView() {
-        similarAnimeAdapter = SimilarAnimeAdapter()
+        similarAnimeAdapter = SimilarAnimeAdapter(10)
         binding.rvSimilarAnimeDetails.apply {
             layoutManager = LinearLayoutManager(this@DetailActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = similarAnimeAdapter
@@ -155,7 +178,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun observeSimilarAnimeLiveData() {
 
-        similarAnimeViewModel.observeSimilarAnimeLiveData().observe(this) {
+        viewModel.observeSimilarAnimeLiveData().observe(this) {
             similarAnimeAdapter.setSimilarAnimeList(it.data)
         }
     }
@@ -168,6 +191,24 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun onMoreSimilarAnimeClick() {
+
+        binding.similarAnimeDetail.setOnClickListener {
+            val intoCharacterSimilarAnime = Intent(this, CharactersSimilarAnimeActivity::class.java)
+            intoCharacterSimilarAnime.putExtra("Type", "Similar Anime")
+            intoCharacterSimilarAnime.putExtra("Anime Id", mal_id.toString())
+            startActivity(intoCharacterSimilarAnime)
+        }
+
+        binding.similarAnimeMoreDetail.setOnClickListener {
+            val intoCharacterSimilarAnime = Intent(this, CharactersSimilarAnimeActivity::class.java)
+            intoCharacterSimilarAnime.putExtra("Type", "Similar Anime")
+            intoCharacterSimilarAnime.putExtra("Anime Id", mal_id.toString())
+            startActivity(intoCharacterSimilarAnime)
+        }
+    }
+
+    // Add To List
     private fun onAddToListClick() {
 
 //        animeToSave?.mal_id ?:

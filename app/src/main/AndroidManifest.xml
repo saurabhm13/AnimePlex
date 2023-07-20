@@ -15,6 +15,12 @@
         android:theme="@style/Theme.AnimePlex"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.CharactersSimilarAnimeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AnimeListByCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.AnimeListActivity"
             android:exported="false" />
         <activity

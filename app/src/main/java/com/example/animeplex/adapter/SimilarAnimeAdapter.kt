@@ -10,11 +10,13 @@ import com.example.animeplex.data.SimilarAnimaData
 import com.example.animeplex.data.SimilarAnime
 import com.example.animeplex.databinding.AnimeItemBinding
 
-class SimilarAnimeAdapter(): RecyclerView.Adapter<SimilarAnimeAdapter.SimilarAnimeViewHolder>() {
+class SimilarAnimeAdapter(limit: Int): RecyclerView.Adapter<SimilarAnimeAdapter.SimilarAnimeViewHolder>() {
 
 
-    private var similarAnimeList = ArrayList<SimilarAnimaData>()
+    private var similarAnimeList = ArrayList<SimilarAnimaData>(limit)
     lateinit var onItemClick: ((SimilarAnimaData) -> Unit)
+
+    val limit = limit
 
     @SuppressLint("NotifyDataSetChanged")
     fun setSimilarAnimeList(similarAnimeList: List<SimilarAnimaData>) {
@@ -30,7 +32,7 @@ class SimilarAnimeAdapter(): RecyclerView.Adapter<SimilarAnimeAdapter.SimilarAni
     }
 
     override fun getItemCount(): Int {
-        return if (similarAnimeList.size > 10){
+        return if (similarAnimeList.size > 10 && limit == 10){
             10
         }else {
             similarAnimeList.size

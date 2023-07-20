@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
@@ -16,14 +15,10 @@ import com.example.animeplex.R
 import com.example.animeplex.adapter.AnimeAdapter
 import com.example.animeplex.adapter.CategoryAdapter
 import com.example.animeplex.adapter.MyAnimeListAdapter
-import com.example.animeplex.adapter.TopAnimeAdapter
-import com.example.animeplex.adapter.TopMangaAdapter
-import com.example.animeplex.adapter.UpcomingAnimeAdapter
-import com.example.animeplex.data.AnimeData
 import com.example.animeplex.data.CategoryHome
 import com.example.animeplex.databinding.FragmentHomeBinding
-import com.example.animeplex.ui.activity.AllCategoryActivity
 import com.example.animeplex.ui.activity.AnimeListActivity
+import com.example.animeplex.ui.activity.AnimeListByCategoryActivity
 import com.example.animeplex.ui.activity.DetailActivity
 import com.example.animeplex.ui.activity.MainActivity
 import com.example.animeplex.viewmodel.HomeViewModel
@@ -69,8 +64,14 @@ class HomeFragment : Fragment() {
         categoryAdapter.setCategoryList(categoryList)
         onCategoryItemClick()
 
+        // Top Anime
+        viewModel.getTopAnime()
+        prepareTopAnimeRecyclerView()
+        onMoreTopAnimeClick()
+
         // My Anime List
         prepareMyAnimeListRecyclerView()
+        onMoreMyAnimeClick()
 
 
         // Using delay of 2 sec for Upcoming anime because api handles 3 request/sec
@@ -79,13 +80,10 @@ class HomeFragment : Fragment() {
         handler.postDelayed(
             Runnable {
 
-                // Top Anime
-                viewModel.getTopAnime()
-                prepareTopAnimeRecyclerView()
-
                 // Top Manga
                 viewModel.getTopManga()
                 prepareTopMangaRecyclerView()
+                onMoreTopMangaClick()
 
             },1000
         )
@@ -96,6 +94,8 @@ class HomeFragment : Fragment() {
                 // Upcoming Anime
                 viewModel.getUpcomingAnime()
                 prepareUpcomingAnimeRecyclerView()
+                onMoreUpComingAnimeClick()
+
             },
             2500
         )
@@ -148,8 +148,10 @@ class HomeFragment : Fragment() {
 
     private fun onCategoryItemClick() {
         categoryAdapter.onItemClick = {
-            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
-            startActivity(intoAnimeList)
+            val intoAnimeByCategory = Intent(activity, AnimeListByCategoryActivity::class.java)
+            intoAnimeByCategory.putExtra("Category Id", it.id.toString())
+            intoAnimeByCategory.putExtra("Category Name", it.name)
+            startActivity(intoAnimeByCategory)
         }
     }
 
@@ -173,6 +175,23 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun onMoreTopAnimeClick() {
+
+        binding.topAnimeHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Top Anime")
+//            intoAnimeList.putExtra("Category", "1")
+            startActivity(intoAnimeList)
+        }
+
+        binding.topAnimeMoreHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Top Anime")
+            startActivity(intoAnimeList)
+        }
+    }
+
+
     // Top Manga
     private fun prepareTopMangaRecyclerView(){
 
@@ -189,6 +208,20 @@ class HomeFragment : Fragment() {
 
         viewModel.observeTopMangaLiveData().observe(viewLifecycleOwner) {
             animeAdapter.setTopAnimeList(it.data)
+        }
+    }
+
+    private fun onMoreTopMangaClick() {
+        binding.topMangaHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Top Manga")
+            startActivity(intoAnimeList)
+        }
+
+        binding.topMangaMoreHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Top Manga")
+            startActivity(intoAnimeList)
         }
     }
 
@@ -211,6 +244,20 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun onMoreUpComingAnimeClick() {
+        binding.upComingHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Upcoming Anime")
+            startActivity(intoAnimeList)
+        }
+
+        binding.upComingMoreHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Upcoming Anime")
+            startActivity(intoAnimeList)
+        }
+    }
+
     // My Anime List
     private fun prepareMyAnimeListRecyclerView() {
 
@@ -229,4 +276,25 @@ class HomeFragment : Fragment() {
             myAnimeListAdapter.setMyAnimeList(it)
         }
     }
+
+    private fun onMoreMyAnimeClick() {
+        binding.myListHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "My Anime List")
+            startActivity(intoAnimeList)
+        }
+
+        binding.myListMoreHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "My Anime List")
+            startActivity(intoAnimeList)
+        }
+    }
+
+    private fun onMoreClick() {
+        val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+        intoAnimeList.putExtra("Category", "1")
+        startActivity(intoAnimeList)
+    }
+
 }
