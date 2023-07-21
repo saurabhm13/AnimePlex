@@ -11,22 +11,42 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="SecondaryText">
-        <item name="android:textSize">20sp</item>
+    <style name="PrimaryText">
+        <item name="android:textSize">24sp</item>
         <item name="fontFamily">@font/andada</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TertiaryText">
+    <style name="CategoryText">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/unkempt_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SecondaryText">
         <item name="android:textSize">18sp</item>
         <item name="fontFamily">@font/andada</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TertiaryText">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/andada</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TertiaryText2">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/andada</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="QuaternaryText">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="fontFamily">@font/andada</item>
         <item name="android:textColor">@color/white</item>
     </style>

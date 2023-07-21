@@ -13,6 +13,10 @@ class MyAnimeListAdapter(private val onItemClick: (AnimeDataToSave) -> Unit) : R
 
     private var myAnimeList = ArrayList<AnimeDataToSave>()
 
+    // View types
+    private val VIEW_TYPE_ADD = 0
+    private val VIEW_TYPE_REGULAR = 1
+
     @SuppressLint("NotifyDataSetChanged")
     fun setMyAnimeList(animeList: List<AnimeDataToSave>) {
         myAnimeList.clear()
@@ -21,8 +25,21 @@ class MyAnimeListAdapter(private val onItemClick: (AnimeDataToSave) -> Unit) : R
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAnimeListViewHolder {
-        val binding = AnimeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyAnimeListViewHolder(binding)
+
+        return when (viewType) {
+            VIEW_TYPE_ADD -> {
+                val binding = AnimeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                MyAnimeListViewHolder(binding)
+            }
+            VIEW_TYPE_REGULAR -> {
+                val binding = AnimeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                MyAnimeListViewHolder(binding)
+            }
+            else -> {
+                val binding = AnimeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                MyAnimeListViewHolder(binding)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

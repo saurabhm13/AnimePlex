@@ -4,6 +4,7 @@ import com.example.animeplex.data.Anime
 import com.example.animeplex.data.AnimeData
 import com.example.animeplex.data.AnimeDetail
 import com.example.animeplex.data.Characters
+import com.example.animeplex.data.Manga
 import com.example.animeplex.data.SimilarAnime
 import retrofit2.Call
 import retrofit2.http.GET
@@ -58,5 +59,10 @@ interface AnimeApi {
     fun getAnimeByCategory(
         @Query("genres") genres: Int
     ): Call<Anime>
+
+    @GET("manga/{id}")
+    fun getMangaDetails(
+        @Path("id", encoded = true)id: Int
+    ): Call<Manga>
 
 }

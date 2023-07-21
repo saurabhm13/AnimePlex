@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/name"
         style="@style/SecondaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,39 +79,75 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         android:contentDescription="@string/edit" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipMyAnimeList"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        style="@style/Widget.MaterialComponents.Chip.Choice"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/my_anime_list"
-        android:fontFamily="@font/andada"
-        android:textSize="15sp"
-        android:textAlignment="center"
-        android:checked="true"
-        app:layout_constraintEnd_toStartOf="@+id/chipMyMangaList"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+<!--    <com.google.android.material.chip.Chip-->
+<!--        android:id="@+id/chipMyAnimeList"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        style="@style/Widget.MaterialComponents.Chip.Choice"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="@string/my_anime_list"-->
+<!--        android:fontFamily="@font/andada"-->
+<!--        android:textSize="15sp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:checked="true"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/chipMyMangaList"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipMyMangaList"
-        android:layout_width="0dp"
+<!--    <com.google.android.material.chip.Chip-->
+<!--        android:id="@+id/chipMyMangaList"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        style="@style/Widget.MaterialComponents.Chip.Choice"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:text="@string/my_manga_list"-->
+<!--        android:textAlignment="center"-->
+<!--        android:fontFamily="@font/andada"-->
+<!--        android:textSize="15sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/chipMyAnimeList"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/chipMyAnimeList" />-->
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup_MyList"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        style="@style/Widget.MaterialComponents.Chip.Choice"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="30dp"
-        android:text="@string/my_manga_list"
-        android:textAlignment="center"
-        android:fontFamily="@font/andada"
-        android:textSize="15sp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chipMyAnimeList"
-        app:layout_constraintTop_toTopOf="@+id/chipMyAnimeList" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_all"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/all"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_anime"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_anime_list"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_manga"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_manga_list"/>
+
+    </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_myList_profile"
@@ -120,7 +156,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipMyAnimeList"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup_MyList"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/anime_item" />
 

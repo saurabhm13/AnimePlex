@@ -318,7 +318,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_detail"
-                tools:listitem="@layout/character_item2_list" />
+                tools:listitem="@layout/anime_item" />
 
             <TextView
                 android:id="@+id/similarAnime_detail"

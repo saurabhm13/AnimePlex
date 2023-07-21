@@ -85,4 +85,11 @@
     <string name="my_anime_list">My Anime List</string>
     <string name="my_manga_list">My Manga List</string>
     <string name="edit">Edit</string>
+    <string name="back">Back</string>
+    <string name="chapters">Chapters</string>
+    <string name="volumes">Volumes</string>
+    <string name="author">Author</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="add">Add</string>
+    <string name="all">All</string>
 </resources>

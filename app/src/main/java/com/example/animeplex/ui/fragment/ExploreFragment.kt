@@ -18,6 +18,7 @@ import com.example.animeplex.ui.activity.AnimeListActivity
 import com.example.animeplex.ui.activity.AnimeListByCategoryActivity
 import com.example.animeplex.ui.activity.DetailActivity
 import com.example.animeplex.ui.activity.MainActivity
+import com.example.animeplex.ui.activity.MangaDetailActivity
 import com.example.animeplex.viewmodel.ExploreViewModel
 import com.example.animeplex.viewmodel.HomeViewModel
 
@@ -186,9 +187,9 @@ class ExploreFragment : Fragment() {
     private fun prepareTopMangaRecyclerView() {
 
         val animeAdapter2 = AnimeAdapter {
-            val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+            val inToMangaDetails = Intent(activity, MangaDetailActivity::class.java)
+            inToMangaDetails.putExtra("id", it.mal_id.toString())
+            startActivity(inToMangaDetails)
         }
 
         binding.rvTopMangaExplore.apply {

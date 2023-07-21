@@ -24,7 +24,9 @@ class HomeViewModel(
     private var topMangaLiveData = MutableLiveData<Anime>()
     private var upcomingAnimeLiveData = MutableLiveData<Anime>()
 
-    private var myAnimeListLiveData = animeDatabase.animeDao().getAllData()
+    private var myAnimeListLiveData = animeDatabase.animeDao().getDataByType("Anime")
+    private var myMangaListLiveData = animeDatabase.animeDao().getDataByType("Manga")
+    private var allMyListLiveData = animeDatabase.animeDao().getAllData()
 
 
     // Featured Images
@@ -111,6 +113,14 @@ class HomeViewModel(
     // My Anime List
     fun observeMyAnimeListLiveData(): LiveData<List<AnimeDataToSave>> {
         return myAnimeListLiveData
+    }
+
+    fun observeMyMangaListLiveData(): LiveData<List<AnimeDataToSave>> {
+        return myMangaListLiveData
+    }
+
+    fun observeAllMyListLiveData(): LiveData<List<AnimeDataToSave>> {
+        return allMyListLiveData
     }
 
     fun addAnimeToListFromUndo(animeData: AnimeDataToSave) {

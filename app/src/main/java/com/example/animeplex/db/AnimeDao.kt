@@ -6,7 +6,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.animeplex.data.AnimeData
 import com.example.animeplex.data.AnimeDataToSave
 
 @Dao
@@ -20,4 +19,7 @@ interface AnimeDao {
 
     @Query("SELECT * FROM `Anime Data`")
     fun getAllData(): LiveData<List<AnimeDataToSave>>
+
+    @Query("SELECT * FROM `Anime data` WHERE type = :type")
+    fun getDataByType(type: String): LiveData<List<AnimeDataToSave>>
 }

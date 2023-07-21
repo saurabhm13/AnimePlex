@@ -1,6 +1,7 @@
 package com.example.animeplex.ui.fragment
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import com.example.animeplex.ui.activity.AnimeListActivity
 import com.example.animeplex.ui.activity.AnimeListByCategoryActivity
 import com.example.animeplex.ui.activity.DetailActivity
 import com.example.animeplex.ui.activity.MainActivity
+import com.example.animeplex.ui.activity.MangaDetailActivity
 import com.example.animeplex.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -196,9 +198,9 @@ class HomeFragment : Fragment() {
     private fun prepareTopMangaRecyclerView(){
 
         val animeAdapter = AnimeAdapter {
-            val inToDetails = Intent(activity, DetailActivity::class.java)
-            inToDetails.putExtra("id", it.mal_id.toString())
-            startActivity(inToDetails)
+            val inToMangaDetails = Intent(activity, MangaDetailActivity::class.java)
+            inToMangaDetails.putExtra("id", it.mal_id.toString())
+            startActivity(inToMangaDetails)
         }
 
         binding.rvTopMangaHome.apply {
@@ -272,8 +274,13 @@ class HomeFragment : Fragment() {
             adapter = myAnimeListAdapter
         }
 
-        viewModel.observeMyAnimeListLiveData().observe(viewLifecycleOwner) {
-            myAnimeListAdapter.setMyAnimeList(it)
+        viewModel.observeAllMyListLiveData().observe(viewLifecycleOwner) {
+
+            if (it.isEmpty()){
+                binding.conMyList.visibility = View.GONE
+            }else {
+                myAnimeListAdapter.setMyAnimeList(it)
+            }
         }
     }
 

@@ -83,7 +83,7 @@ class DetailActivity : AppCompatActivity() {
             title = it.data.title
             image = it.data.images.jpg.large_image_url
 
-            animeToSave = AnimeDataToSave(mal_id!!, title!!, image!!)
+            animeToSave = AnimeDataToSave(mal_id!!, title!!, image!!, "Anime")
 
 
             Glide.with(this)
