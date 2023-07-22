@@ -19,6 +19,10 @@ class ExploreViewModel(): ViewModel() {
     private var actionAnimeLiveData = MutableLiveData<Anime>()
     private var animeByCategoryLiveData = MutableLiveData<Anime>()
 
+    // Search Result
+    private var animeSearchResultLiveData = MutableLiveData<Anime>()
+    private var mangaSearchResultLiveData = MutableLiveData<Anime>()
+
     fun getMovieAnime() {
 
         RetrofitInstance.api.getMovieAnime("movie", "popularity").enqueue(object : Callback<Anime>{
@@ -100,4 +104,44 @@ class ExploreViewModel(): ViewModel() {
         return animeByCategoryLiveData
     }
 
+    // Search Result
+    fun getAnimeSearchResult(animeSearch: String) {
+
+        RetrofitInstance.api.getAnimeSearchResult(animeSearch).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    animeSearchResultLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Anime search", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeAnimeSearchLiveData(): LiveData<Anime> {
+        return animeSearchResultLiveData
+    }
+
+    fun getMangaSearchResult(animeSearch: String) {
+
+        RetrofitInstance.api.getMangaSearchResult(animeSearch).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    mangaSearchResultLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Anime search", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeMangaSearchLiveData(): LiveData<Anime> {
+        return mangaSearchResultLiveData
+    }
 }

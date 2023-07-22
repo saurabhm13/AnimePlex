@@ -19,6 +19,7 @@ import com.example.animeplex.ui.activity.AnimeListByCategoryActivity
 import com.example.animeplex.ui.activity.DetailActivity
 import com.example.animeplex.ui.activity.MainActivity
 import com.example.animeplex.ui.activity.MangaDetailActivity
+import com.example.animeplex.ui.activity.SearchActivity
 import com.example.animeplex.viewmodel.ExploreViewModel
 import com.example.animeplex.viewmodel.HomeViewModel
 
@@ -105,6 +106,8 @@ class ExploreFragment : Fragment() {
             }, 2000
         )
 
+        // Search Click
+        onSearchClick()
 
     }
 
@@ -348,5 +351,11 @@ class ExploreFragment : Fragment() {
         }
     }
 
-
+    // Search
+    private fun onSearchClick() {
+        binding.search.setOnClickListener {
+            val intoSearch = Intent(activity, SearchActivity::class.java)
+            startActivity(intoSearch)
+        }
+    }
 }

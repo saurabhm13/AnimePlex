@@ -65,4 +65,14 @@ interface AnimeApi {
         @Path("id", encoded = true)id: Int
     ): Call<Manga>
 
+    @GET("anime")
+    fun getAnimeSearchResult(
+        @Query("q")animeSearch: String
+    ): Call<Anime>
+
+    @GET("manga")
+    fun getMangaSearchResult(
+        @Query("q")mangaSearch: String
+    ): Call<Anime>
+
 }
