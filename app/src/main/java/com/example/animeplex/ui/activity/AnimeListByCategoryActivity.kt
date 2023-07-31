@@ -37,9 +37,10 @@ class AnimeListByCategoryActivity : AppCompatActivity() {
     private fun prepareRecyclerView() {
 
         val animeAdapter = AnimeAdapter {
-            val intoDetail = Intent(this, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+            val inToDetails = Intent(this, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
         }
 
         binding.rvAnimeList.apply {

@@ -3,7 +3,6 @@ package com.example.animeplex.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.animeplex.adapter.AnimeAdapter
 import com.example.animeplex.adapter.MyAnimeListAdapter
@@ -11,7 +10,6 @@ import com.example.animeplex.databinding.ActivityAnimeListBinding
 import com.example.animeplex.db.AnimeDatabase
 import com.example.animeplex.viewmodel.ExploreViewModel
 import com.example.animeplex.viewmodel.HomeViewModel
-import com.example.animeplex.viewmodel.HomeViewModelFactory
 
 class AnimeListActivity : AppCompatActivity() {
 
@@ -43,8 +41,9 @@ class AnimeListActivity : AppCompatActivity() {
 
     private fun prepareRecyclerView() {
 
+        val intoDetail = Intent(this, AnimeMangaDetailActivity::class.java)
+
         val animeAdapter = AnimeAdapter {
-            val intoDetail = Intent(this, DetailActivity::class.java)
             intoDetail.putExtra("id", it.mal_id.toString())
             startActivity(intoDetail)
         }
@@ -57,6 +56,8 @@ class AnimeListActivity : AppCompatActivity() {
         when (type) {
             "Top Anime" -> {
 
+                intoDetail.putExtra("Content", "Anime")
+
                 homeViewModel.getTopAnime()
 
                 homeViewModel.observeTopAnimeLiveData().observe(this) {
@@ -66,6 +67,7 @@ class AnimeListActivity : AppCompatActivity() {
             }
             "Top Manga" -> {
 
+                intoDetail.putExtra("Content", "Manga")
                 homeViewModel.getTopManga()
 
                 homeViewModel.observeTopMangaLiveData().observe(this) {
@@ -75,6 +77,8 @@ class AnimeListActivity : AppCompatActivity() {
             }
             "Upcoming Anime" -> {
 
+
+                intoDetail.putExtra("Content", "Anime")
                 homeViewModel.getUpcomingAnime()
 
                 homeViewModel.observeUpcomingAnimeLiveData().observe(this) {
@@ -88,6 +92,7 @@ class AnimeListActivity : AppCompatActivity() {
             }
             "Anime Movie" -> {
 
+                intoDetail.putExtra("Content", "Anime")
                 viewModel.getMovieAnime()
                 viewModel.observeMovieAnimeLiveData().observe(this) {
                     animeAdapter.setTopAnimeList(it.data)
@@ -95,6 +100,7 @@ class AnimeListActivity : AppCompatActivity() {
             }
             "Award Winning" -> {
 
+                intoDetail.putExtra("Content", "Anime")
                 viewModel.getAwardWinningAnime(46)
                 viewModel.observeAwardWinningAnimeLiveData().observe(this) {
                     animeAdapter.setTopAnimeList(it.data)
@@ -102,6 +108,7 @@ class AnimeListActivity : AppCompatActivity() {
             }
             "Action Anime" -> {
 
+                intoDetail.putExtra("Content", "Anime")
                 viewModel.getAnimeByCategory(1)
                 viewModel.observeAnimeByCategoryLiveData().observe(this) {
                     animeAdapter.setTopAnimeList(it.data)
@@ -124,8 +131,9 @@ class AnimeListActivity : AppCompatActivity() {
         homeViewModel.observeMyAnimeListLiveData()
 
         val myAnimeListAdapter = MyAnimeListAdapter{
-            val intoDetail = Intent(this, DetailActivity::class.java)
+            val intoDetail = Intent(this, AnimeMangaDetailActivity::class.java)
             intoDetail.putExtra("id", it.mal_id.toString())
+            intoDetail.putExtra("Content", it.type)
             startActivity(intoDetail)
         }
 

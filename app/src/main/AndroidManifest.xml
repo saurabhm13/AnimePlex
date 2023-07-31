@@ -18,7 +18,7 @@
             android:name=".ui.activity.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MangaDetailActivity"
+            android:name=".ui.activity.AnimeMangaDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.CharactersSimilarAnimeActivity"
@@ -32,14 +32,6 @@
         <activity
             android:name=".ui.activity.AllCategoryActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.activity.DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.DetailsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_details"
-            android:theme="@style/Theme.AnimePlex" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:exported="true">

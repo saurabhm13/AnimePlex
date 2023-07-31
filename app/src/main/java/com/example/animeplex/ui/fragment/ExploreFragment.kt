@@ -16,9 +16,8 @@ import com.example.animeplex.databinding.FragmentExploreBinding
 import com.example.animeplex.ui.activity.AllCategoryActivity
 import com.example.animeplex.ui.activity.AnimeListActivity
 import com.example.animeplex.ui.activity.AnimeListByCategoryActivity
-import com.example.animeplex.ui.activity.DetailActivity
 import com.example.animeplex.ui.activity.MainActivity
-import com.example.animeplex.ui.activity.MangaDetailActivity
+import com.example.animeplex.ui.activity.AnimeMangaDetailActivity
 import com.example.animeplex.ui.activity.SearchActivity
 import com.example.animeplex.viewmodel.ExploreViewModel
 import com.example.animeplex.viewmodel.HomeViewModel
@@ -115,9 +114,10 @@ class ExploreFragment : Fragment() {
     private fun prepareMovieAnimeRecyclerView() {
 
         val animeAdapter1 = AnimeAdapter{
-            val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
         }
 
         binding.rvAnimeMovieExplore.apply {
@@ -190,9 +190,10 @@ class ExploreFragment : Fragment() {
     private fun prepareTopMangaRecyclerView() {
 
         val animeAdapter2 = AnimeAdapter {
-            val inToMangaDetails = Intent(activity, MangaDetailActivity::class.java)
-            inToMangaDetails.putExtra("id", it.mal_id.toString())
-            startActivity(inToMangaDetails)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Manga")
+            startActivity(inToDetails)
         }
 
         binding.rvTopMangaExplore.apply {
@@ -223,9 +224,10 @@ class ExploreFragment : Fragment() {
     private fun prepareTopAnimeRecyclerView() {
 
         val animeAdapter3 = AnimeAdapter{
-            val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
         }
 
         binding.rvTopAnimeExplore.apply {
@@ -256,9 +258,10 @@ class ExploreFragment : Fragment() {
     private fun prepareAwardWinningAnimeRecyclerView() {
 
         val animeAdapter4 = AnimeAdapter{
-            val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
         }
 
         binding.rvAwardWinningAnimeExplore.apply {
@@ -289,9 +292,10 @@ class ExploreFragment : Fragment() {
     private fun prepareActionAnimeRecyclerView() {
 
         val animeAdapter5 = AnimeAdapter{
-            val intoDetail = Intent(activity, DetailActivity::class.java)
-            intoDetail.putExtra("id", it.mal_id.toString())
-            startActivity(intoDetail)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
         }
 
         binding.rvActionAnimeExplore.apply {
@@ -322,8 +326,9 @@ class ExploreFragment : Fragment() {
     private fun prepareUpComingAnimeRecyclerView() {
 
         val animeAdapter6 = AnimeAdapter{
-            val intoDetail = Intent(activity, DetailActivity::class.java)
+            val intoDetail = Intent(activity, AnimeMangaDetailActivity::class.java)
             intoDetail.putExtra("id", it.mal_id.toString())
+            intoDetail.putExtra("Content", "Anime")
             startActivity(intoDetail)
         }
 

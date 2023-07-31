@@ -2,28 +2,19 @@ package com.example.animeplex.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.example.animeplex.R
 import com.example.animeplex.adapter.ListAdapter
 import com.example.animeplex.adapter.MyAnimeListAdapter
 import com.example.animeplex.databinding.FragmentProfileBinding
-import com.example.animeplex.db.AnimeDao
-import com.example.animeplex.db.AnimeRepository
-import com.example.animeplex.ui.activity.DetailActivity
 import com.example.animeplex.ui.activity.MainActivity
+import com.example.animeplex.ui.activity.AnimeMangaDetailActivity
 import com.example.animeplex.viewmodel.HomeViewModel
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import com.google.android.material.snackbar.Snackbar
 
 class ProfileFragment : Fragment() {
 
@@ -60,8 +51,9 @@ class ProfileFragment : Fragment() {
 
         val listAdapter = ListAdapter(
             onItemClick = {
-                val inToDetails = Intent(activity, DetailActivity::class.java)
+                val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
                 inToDetails.putExtra("id", it.mal_id.toString())
+                inToDetails.putExtra("Content", it.type)
                 startActivity(inToDetails)
             },
             onAddItemClick = {

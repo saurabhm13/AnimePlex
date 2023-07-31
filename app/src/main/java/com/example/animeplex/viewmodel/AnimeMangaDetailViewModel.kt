@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.animeplex.data.AnimeDataToSave
 import com.example.animeplex.data.AnimeDetail
 import com.example.animeplex.data.Characters
+import com.example.animeplex.data.Manga
 import com.example.animeplex.data.SimilarAnime
 import com.example.animeplex.db.AnimeDatabase
 import com.example.animeplex.retrofit.RetrofitInstance
@@ -19,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AnimeDetailViewModel(
+class AnimeMangaDetailViewModel(
     private val animeDatabase: AnimeDatabase
 ): ViewModel() {
 
@@ -27,6 +28,7 @@ class AnimeDetailViewModel(
     private var animeDetailLiveData = MutableLiveData<AnimeDetail>()
     private var characterLiveData = MutableLiveData<Characters>()
     private var similarAnimeLiveData = MutableLiveData<SimilarAnime>()
+    private var mangaDetailLiveData = MutableLiveData<Manga>()
 
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -119,6 +121,37 @@ class AnimeDetailViewModel(
 
     fun observeSimilarAnimeLiveData(): LiveData<SimilarAnime> {
         return similarAnimeLiveData
+    }
+
+    private var mangaCharacterLiveData = MutableLiveData<Characters>()
+    private var similarMangaLiveData = MutableLiveData<SimilarAnime>()
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun getMangaDetail(id: Int) {
+
+        GlobalScope.launch(Dispatchers.IO){
+
+            try {
+                RetrofitInstance.api.getMangaDetails(id).enqueue(object : Callback<Manga> {
+                    override fun onResponse(call: Call<Manga>, response: Response<Manga>) {
+                        if (response.body() != null){
+                            mangaDetailLiveData.value = response.body()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Manga>, t: Throwable) {
+                        Log.d("Detail Activity", t.message.toString())
+                    }
+
+                })
+            }catch (e: Exception){
+                Log.d("Detail Activity", e.message.toString())
+            }
+        }
+    }
+
+    fun observeMangaDetailLiveData(): LiveData<Manga> {
+        return mangaDetailLiveData
     }
 
     // Add To List

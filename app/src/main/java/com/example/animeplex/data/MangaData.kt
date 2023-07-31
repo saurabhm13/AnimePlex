@@ -6,6 +6,8 @@ data class MangaData(
     val background: String,
     val chapters: Int,
     val demographics: List<Demographic>,
+    val duration: String,
+    val episodes: Int,
     val explicit_genres: List<Any>,
     val favorites: Int,
     val genres: List<Genre>,
@@ -30,5 +32,6 @@ data class MangaData(
     val titles: List<Title>,
     val type: String,
     val url: String,
-    val volumes: Int
+    val volumes: Int,
+    val year: Int
 )

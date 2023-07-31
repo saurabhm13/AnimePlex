@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.animeplex.data.Data
 import com.example.animeplex.databinding.AnimeItemBinding
-import com.example.animeplex.databinding.CharacterItem2ListBinding
 
-class CharacterAnimeDetailAdapter(): RecyclerView.Adapter<CharacterAnimeDetailAdapter.CharacterADViewHolder>() {
+class CharacterAdapter(): RecyclerView.Adapter<CharacterAdapter.CharacterADViewHolder>() {
 
     private var characterArrayList = ArrayList<Data>()
 

@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.animeplex.data.CharacterData
 import com.example.animeplex.data.Data
 import com.example.animeplex.databinding.CharacterItem1ListBinding
 
-class CharacterDetailAdapter(): RecyclerView.Adapter<CharacterDetailAdapter.CharacterDetailViewHolder>() {
+class AllCharacterDetailAdapter(): RecyclerView.Adapter<AllCharacterDetailAdapter.CharacterDetailViewHolder>() {
 
     private var characterList = ArrayList<Data>()
 

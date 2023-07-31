@@ -1,7 +1,6 @@
 package com.example.animeplex.ui.fragment
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -20,9 +19,8 @@ import com.example.animeplex.data.CategoryHome
 import com.example.animeplex.databinding.FragmentHomeBinding
 import com.example.animeplex.ui.activity.AnimeListActivity
 import com.example.animeplex.ui.activity.AnimeListByCategoryActivity
-import com.example.animeplex.ui.activity.DetailActivity
 import com.example.animeplex.ui.activity.MainActivity
-import com.example.animeplex.ui.activity.MangaDetailActivity
+import com.example.animeplex.ui.activity.AnimeMangaDetailActivity
 import com.example.animeplex.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -123,7 +121,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onItemSelected(position: Int) {
-                val intoDetail = Intent(activity, DetailActivity::class.java)
+                val intoDetail = Intent(activity, AnimeMangaDetailActivity::class.java)
                 // ToDo Send "id"
                 startActivity(intoDetail)
             }
@@ -162,8 +160,9 @@ class HomeFragment : Fragment() {
     private fun prepareTopAnimeRecyclerView() {
 
         val animeAdapter = AnimeAdapter {
-            val inToDetails = Intent(activity, DetailActivity::class.java)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
             inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
             startActivity(inToDetails)
         }
 
@@ -198,9 +197,14 @@ class HomeFragment : Fragment() {
     private fun prepareTopMangaRecyclerView(){
 
         val animeAdapter = AnimeAdapter {
-            val inToMangaDetails = Intent(activity, MangaDetailActivity::class.java)
-            inToMangaDetails.putExtra("id", it.mal_id.toString())
-            startActivity(inToMangaDetails)
+//            val inToMangaDetails = Intent(activity, MangaDetailActivity::class.java)
+//            inToMangaDetails.putExtra("id", it.mal_id.toString())
+//            startActivity(inToMangaDetails)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Manga")
+            startActivity(inToDetails)
+
         }
 
         binding.rvTopMangaHome.apply {
@@ -231,8 +235,9 @@ class HomeFragment : Fragment() {
     private fun prepareUpcomingAnimeRecyclerView() {
 
         val animeAdapter = AnimeAdapter {
-            val inToDetails = Intent(activity, DetailActivity::class.java)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
             inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
             startActivity(inToDetails)
         }
 
@@ -264,8 +269,9 @@ class HomeFragment : Fragment() {
     private fun prepareMyAnimeListRecyclerView() {
 
         myAnimeListAdapter = MyAnimeListAdapter {
-            val inToDetails = Intent(activity, DetailActivity::class.java)
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
             inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", it.type)
             startActivity(inToDetails)
         }
 

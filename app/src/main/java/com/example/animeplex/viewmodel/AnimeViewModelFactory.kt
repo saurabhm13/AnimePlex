@@ -9,7 +9,7 @@ class AnimeViewModelFactory(
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AnimeDetailViewModel(animeDatabase) as T
+        return AnimeMangaDetailViewModel(animeDatabase) as T
     }
 
 }

@@ -5,21 +5,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.animeplex.adapter.AnimeAdapter
-import com.example.animeplex.adapter.CharacterAnimeDetailAdapter
-import com.example.animeplex.adapter.CharacterDetailAdapter
+import com.example.animeplex.adapter.AllCharacterDetailAdapter
 import com.example.animeplex.adapter.SimilarAnimeAdapter
 import com.example.animeplex.databinding.ActivityCharactersSimilarAnimeBinding
 import com.example.animeplex.db.AnimeDatabase
-import com.example.animeplex.viewmodel.AnimeDetailViewModel
+import com.example.animeplex.viewmodel.AnimeMangaDetailViewModel
 
 class CharactersSimilarAnimeActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityCharactersSimilarAnimeBinding
 
-    lateinit var animeDetailViewModel: AnimeDetailViewModel
+    lateinit var animeMangaDetailViewModel: AnimeMangaDetailViewModel
 
-    private lateinit var characterAdapter: CharacterDetailAdapter
+    private lateinit var characterAdapter: AllCharacterDetailAdapter
     private lateinit var similarAnimeAdapter: SimilarAnimeAdapter
 
     lateinit var type: String
@@ -32,7 +30,7 @@ class CharactersSimilarAnimeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val animeDatabase = AnimeDatabase.getInstance(this)
-        animeDetailViewModel = AnimeDetailViewModel(animeDatabase)
+        animeMangaDetailViewModel = AnimeMangaDetailViewModel(animeDatabase)
 
         val intent = intent
         type = intent.getStringExtra("Type")!!
@@ -42,13 +40,13 @@ class CharactersSimilarAnimeActivity : AppCompatActivity() {
 
         when (type) {
             "Character" -> {
-                animeDetailViewModel.getCharacters(animeId.toInt())
+                animeMangaDetailViewModel.getCharacters(animeId.toInt())
                 prepareCharacterRecyclerView()
 
                 binding.textTopBar.text = "Characters"
             }
             "Similar Anime" -> {
-                animeDetailViewModel.getSimilarAnime(animeId.toInt())
+                animeMangaDetailViewModel.getSimilarAnime(animeId.toInt())
                 prepareSimilarAnimeRecycleView()
                 onSimilarAnimeItemClick()
 
@@ -60,14 +58,14 @@ class CharactersSimilarAnimeActivity : AppCompatActivity() {
 
     private fun prepareCharacterRecyclerView() {
 
-        characterAdapter = CharacterDetailAdapter()
+        characterAdapter = AllCharacterDetailAdapter()
 
         binding.rvAnimeList.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = characterAdapter
         }
 
-        animeDetailViewModel.observeCharacterLiveData().observe(this) {
+        animeMangaDetailViewModel.observeCharacterLiveData().observe(this) {
             characterAdapter.setCharacterList(it.data)
         }
     }
@@ -82,7 +80,7 @@ class CharactersSimilarAnimeActivity : AppCompatActivity() {
             adapter = similarAnimeAdapter
         }
 
-        animeDetailViewModel.observeSimilarAnimeLiveData().observe(this) {
+        animeMangaDetailViewModel.observeSimilarAnimeLiveData().observe(this) {
             similarAnimeAdapter.setSimilarAnimeList(it.data)
         }
 
@@ -90,8 +88,9 @@ class CharactersSimilarAnimeActivity : AppCompatActivity() {
 
     private fun onSimilarAnimeItemClick() {
         similarAnimeAdapter.onItemClick = {
-            val inToDetails = Intent(this, DetailActivity::class.java)
+            val inToDetails = Intent(this, AnimeMangaDetailActivity::class.java)
             inToDetails.putExtra("id", it.entry.mal_id)
+            inToDetails.putExtra("Content", "Anime")
             startActivity(inToDetails)
         }
     }

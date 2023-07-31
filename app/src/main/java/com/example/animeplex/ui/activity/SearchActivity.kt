@@ -44,8 +44,10 @@ class SearchActivity : AppCompatActivity() {
 
     private fun prepareResultRecyclerView(checkedId: Int) {
 
+        val intoDetail = Intent(this, AnimeMangaDetailActivity::class.java)
+
         val searchResultAdapter = SearchResultAdapter {
-            val intoDetail = Intent(this, DetailActivity::class.java)
+
             intoDetail.putExtra("id", it.mal_id.toString())
             startActivity(intoDetail)
         }
@@ -57,6 +59,7 @@ class SearchActivity : AppCompatActivity() {
 
         when (checkedId) {
             R.id.chip_anime -> {
+                intoDetail.putExtra("Content", "Anime")
                 exploreViewModel.getAnimeSearchResult(searchQuery)
                 exploreViewModel.observeAnimeSearchLiveData().observe(this) {
                     searchResultAdapter.setSearchList(it.data)
@@ -64,6 +67,7 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
             R.id.chip_manga -> {
+                intoDetail.putExtra("Content", "Manga")
                 exploreViewModel.getMangaSearchResult(searchQuery)
                 exploreViewModel.observeMangaSearchLiveData().observe(this) {
                     searchResultAdapter.setSearchList(it.data)
@@ -71,6 +75,7 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
             else -> {
+                intoDetail.putExtra("Content", "Anime")
                 exploreViewModel.observeAnimeSearchLiveData().observe(this) {
                     searchResultAdapter.setSearchList(it.data)
                     binding.chipGroupSearch.visibility = View.VISIBLE
