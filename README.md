@@ -21,9 +21,8 @@ new series, and relish the excitement of exploring diverse genres that cater to 
 
 ## Screenshots
 
-<img align="left" src = "https://github.com/saurabhm13/AnimePlex/assets/98728292/52e1343c-a4c4-4105-bfcf-2c9dd41ac503" width="200">
-<img align="right" src = "https://github.com/saurabhm13/AnimePlex/assets/98728292/c1f23f43-df39-4ea8-a733-20012df99e65" width="200">
+<img align="left" src = "https://github.com/saurabhm13/AnimePlex/assets/98728292/2ffa234d-6783-4b31-b699-fcffa9b242cc" width="200">
+<img align="right" src = "https://github.com/saurabhm13/AnimePlex/assets/98728292/7f908616-4d4c-49a7-93e1-33cf311ba905" width="200">
 <p align="center">
-  <img src = "https://github.com/saurabhm13/AnimePlex/assets/98728292/5a4fa469-b413-433a-89b8-6667d9606bc4" width="200">
+  <img src = "https://github.com/saurabhm13/AnimePlex/assets/98728292/95ca670c-4924-40cd-b399-f71af1542d91" width="200">
 </p>
-
