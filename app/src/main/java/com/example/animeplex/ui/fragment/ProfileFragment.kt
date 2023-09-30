@@ -33,11 +33,6 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         prepareMyAnimeListRecyclerView(-1)
 
@@ -45,6 +40,8 @@ class ProfileFragment : Fragment() {
             prepareMyAnimeListRecyclerView(checkedId)
         }
         deleteAndUndoMyAnimeList()
+
+        return binding.root
     }
 
     private fun prepareMyAnimeListRecyclerView(checkedId: Int) {
@@ -57,7 +54,7 @@ class ProfileFragment : Fragment() {
                 startActivity(inToDetails)
             },
             onAddItemClick = {
-                findNavController().navigate(R.id.exploreFragment)
+                findNavController().navigate(R.id.homeFragment)
             }
         )
 

@@ -7,15 +7,10 @@
         app:cnb_iconColor="@color/home_color"
         android:icon="@drawable/ic_home"/>
 
-    <item android:id="@+id/exploreFragment"
-        android:title="@string/explore"
-        app:cnb_iconColor="@color/explore_color"
-        android:icon="@drawable/ic_explore"/>
-
-    <item android:id="@+id/mangaFragment"
-        android:title="@string/manga"
+    <item android:id="@+id/searchFragment"
+        android:title="@string/search"
         app:cnb_iconColor="@color/manga_color"
-        android:icon="@drawable/ic_book"/>
+        android:icon="@drawable/ic_search"/>
 
     <item android:id="@+id/profileFragment"
         android:title="@string/profile"

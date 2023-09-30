@@ -1,17 +1,13 @@
 package com.example.animeplex.adapter
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.animeplex.R
 import com.example.animeplex.data.AnimeDataToSave
 import com.example.animeplex.databinding.AddItemBinding
 import com.example.animeplex.databinding.AnimeItemBinding
-import com.example.animeplex.ui.fragment.ExploreFragment
 
 class ListAdapter(
     private val onItemClick: (AnimeDataToSave) -> Unit,
@@ -72,10 +68,7 @@ class ListAdapter(
     inner class AddViewHolder(private val binding: AddItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindAddItem() {
-            // Handle the "Add" item view here
             binding.root.setOnClickListener {
-                // Perform action when the "Add" item is clicked
-                // For example, open a dialog to add new data
                 onAddItemClick.invoke()
             }
         }

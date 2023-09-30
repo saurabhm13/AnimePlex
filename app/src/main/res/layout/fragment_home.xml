@@ -66,16 +66,45 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_category_home"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginStart="5dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/slideShow_home"
-                tools:listitem="@layout/category_items" />
+                >
+
+                <TextView
+                    android:id="@+id/categories_home"
+                    style="@style/SecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/categories"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/categoryMore_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Icon"
+                    android:src="@drawable/ic_arrow_right"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/categories_home"
+                    app:layout_constraintBottom_toBottomOf="@id/categories_home"
+                    android:contentDescription="@string/more" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_category_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/categories_home"
+                    tools:listitem="@layout/category_items" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/con_topAnime"
@@ -201,6 +230,46 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/animeMovie_home"
+                    style="@style/SecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/movies"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/animeMovieMore_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_right"
+                    style="@style/Icon"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/animeMovie_home"
+                    app:layout_constraintBottom_toBottomOf="@id/animeMovie_home"
+                    android:contentDescription="@string/more" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_animeMovie_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    tools:listitem="@layout/anime_item"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/animeMovie_home"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/con_upComing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -241,190 +310,87 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/awardWinningAnime_home"
+                    style="@style/SecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/award_winning"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/awardWinningAnimeMore_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Icon"
+                    android:src="@drawable/ic_arrow_right"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/awardWinningAnime_home"
+                    app:layout_constraintBottom_toBottomOf="@id/awardWinningAnime_home"
+                    android:contentDescription="@string/more" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_awardWinningAnime_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    tools:listitem="@layout/anime_item"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/awardWinningAnime_home"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/actionAnime_home"
+                    style="@style/SecondaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/action_anime"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/actionAnimeMore_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_right"
+                    style="@style/Icon"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/actionAnime_home"
+                    app:layout_constraintBottom_toBottomOf="@id/actionAnime_home"
+                    android:contentDescription="@string/more" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_actionAnime_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    tools:listitem="@layout/anime_item"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/actionAnime_home"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
-
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/slideShow_home"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="200dp"-->
-<!--                android:layout_margin="10dp"-->
-<!--                app:cardCornerRadius="5dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
-
-<!--                <com.denzcoskun.imageslider.ImageSlider-->
-<!--                    android:id="@+id/image_slider"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    app:iss_auto_cycle="true"-->
-<!--                    app:iss_delay="3000"-->
-<!--                    app:iss_period="3000"-->
-<!--                    app:iss_text_align="CENTER" />-->
-
-<!--                &lt;!&ndash;                <ImageView&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_height="match_parent"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:scaleType="centerCrop"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:src="@drawable/img6" />&ndash;&gt;-->
-
-<!--            </androidx.cardview.widget.CardView>-->
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/rv_category_home"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="75dp"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/slideShow_home"-->
-<!--                tools:listitem="@layout/category_items" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/topAnime_home"-->
-<!--                style="@style/SecondaryText"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="@string/top_anime"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/rv_category_home" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/topAnimeMore_home"-->
-<!--                android:layout_width="25dp"-->
-<!--                android:layout_height="25dp"-->
-<!--                style="@style/Icon"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:contentDescription="@string/top_anime"-->
-<!--                android:src="@drawable/ic_arrow_right"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/topAnime_home"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/topAnime_home" />-->
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/rv_topAnime_home"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="170dp"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/topAnime_home"-->
-<!--                tools:listitem="@layout/anime_item" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/myList_home"-->
-<!--                style="@style/SecondaryText"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="@string/my_list"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/rv_topAnime_home" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/myListMore_home"-->
-<!--                android:layout_width="25dp"-->
-<!--                android:layout_height="25dp"-->
-<!--                style="@style/Icon"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:contentDescription="@string/my_list"-->
-<!--                android:src="@drawable/ic_arrow_right"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/myList_home"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/myList_home" />-->
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/rv_myList_home"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="170dp"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/myList_home"-->
-<!--                tools:listitem="@layout/anime_item" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/topManga_home"-->
-<!--                style="@style/SecondaryText"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="@string/top_mangas"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/rv_myList_home" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/topMangaMore_home"-->
-<!--                android:layout_width="25dp"-->
-<!--                android:layout_height="25dp"-->
-<!--                style="@style/Icon"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:contentDescription="@string/top_mangas"-->
-<!--                android:src="@drawable/ic_arrow_right"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/topManga_home"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/topManga_home" />-->
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/rv_topManga_home"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="170dp"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/topManga_home"-->
-<!--                tools:listitem="@layout/anime_item" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/upComing_home"-->
-<!--                style="@style/SecondaryText"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="@string/up_coming_anime"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/rv_topManga_home" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/upComingMore_home"-->
-<!--                android:layout_width="25dp"-->
-<!--                android:layout_height="25dp"-->
-<!--                style="@style/Icon"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:contentDescription="@string/up_coming_anime"-->
-<!--                android:src="@drawable/ic_arrow_right"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/upComing_home"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/upComing_home" />-->
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/rv_upComing_home"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="170dp"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/upComing_home"-->
-<!--                tools:listitem="@layout/anime_item" />-->
-
-<!--&lt;!&ndash;            <Button&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/test_btn"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintBottom_toBottomOf="parent"/>&ndash;&gt;-->
-
-
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     </ScrollView>
 

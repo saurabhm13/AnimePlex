@@ -9,7 +9,6 @@ import com.example.animeplex.data.AnimeData
 import com.example.animeplex.data.AnimeDataToSave
 
 @Database(entities = [AnimeDataToSave::class], version = 1, exportSchema = false)
-@TypeConverters(AnimeTypeConvertor::class)
 abstract class AnimeDatabase: RoomDatabase() {
 
     abstract fun animeDao(): AnimeDao

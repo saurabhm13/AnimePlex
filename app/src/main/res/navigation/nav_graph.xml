@@ -11,18 +11,13 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/exploreFragment"
-        android:name="com.example.animeplex.ui.fragment.ExploreFragment"
-        android:label="fragment_explore"
-        tools:layout="@layout/fragment_explore" />
-    <fragment
-        android:id="@+id/mangaFragment"
-        android:name="com.example.animeplex.ui.fragment.MangaFragment"
-        android:label="fragment_manga"
-        tools:layout="@layout/fragment_manga" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.animeplex.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.animeplex.ui.fragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

@@ -23,6 +23,15 @@ class HomeViewModel(
     private var topAnimeLiveData = MutableLiveData<Anime>()
     private var topMangaLiveData = MutableLiveData<Anime>()
     private var upcomingAnimeLiveData = MutableLiveData<Anime>()
+    private var movieAnimeLiveData = MutableLiveData<Anime>()
+    private var awardWinningAnimeLiveData = MutableLiveData<Anime>()
+    private var actionAnimeLiveData = MutableLiveData<Anime>()
+
+    // Search Result
+    private var animeSearchResultLiveData = MutableLiveData<Anime>()
+    private var mangaSearchResultLiveData = MutableLiveData<Anime>()
+
+    private var animeByCategoryLiveData = MutableLiveData<Anime>()
 
     private var myAnimeListLiveData = animeDatabase.animeDao().getDataByType("Anime")
     private var myMangaListLiveData = animeDatabase.animeDao().getDataByType("Manga")
@@ -106,6 +115,69 @@ class HomeViewModel(
         })
     }
 
+    // Anime Movie
+    fun getMovieAnime() {
+
+        RetrofitInstance.api.getMovieAnime("movie", "popularity").enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    movieAnimeLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Explore", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeMovieAnimeLiveData(): LiveData<Anime>{
+        return movieAnimeLiveData
+    }
+
+    // Award wining Anime
+    fun getAwardWinningAnime(genres: Int) {
+
+        RetrofitInstance.api.getAnimeByCategory(genres).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    awardWinningAnimeLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Award winning", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeAwardWinningAnimeLiveData(): LiveData<Anime> {
+        return awardWinningAnimeLiveData
+    }
+
+    // Action Anime
+    fun getActionAnime(genres: Int) {
+
+        RetrofitInstance.api.getAnimeByCategory(genres).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    actionAnimeLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Award winning", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeActionAnimeLiveData(): LiveData<Anime> {
+        return actionAnimeLiveData
+    }
+
     fun observeUpcomingAnimeLiveData(): LiveData<Anime>{
         return upcomingAnimeLiveData
     }
@@ -121,6 +193,69 @@ class HomeViewModel(
 
     fun observeAllMyListLiveData(): LiveData<List<AnimeDataToSave>> {
         return allMyListLiveData
+    }
+
+    // Search Result
+    fun getAnimeSearchResult(animeSearch: String) {
+
+        RetrofitInstance.api.getAnimeSearchResult(animeSearch).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    animeSearchResultLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Anime search", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeAnimeSearchLiveData(): LiveData<Anime> {
+        return animeSearchResultLiveData
+    }
+
+    fun getMangaSearchResult(animeSearch: String) {
+
+        RetrofitInstance.api.getMangaSearchResult(animeSearch).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    mangaSearchResultLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Anime search", t.message.toString())
+            }
+
+        })
+    }
+
+    fun observeMangaSearchLiveData(): LiveData<Anime> {
+        return mangaSearchResultLiveData
+    }
+
+    // Anime by Category
+    fun getAnimeByCategory(genres: Int) {
+
+        RetrofitInstance.api.getAnimeByCategory(genres).enqueue(object : Callback<Anime>{
+            override fun onResponse(call: Call<Anime>, response: Response<Anime>) {
+                if (response.body() != null){
+                    animeByCategoryLiveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Anime>, t: Throwable) {
+                Log.d("Award winning", t.message.toString())
+            }
+
+        })
+
+    }
+
+    fun observeAnimeByCategoryLiveData(): LiveData<Anime> {
+        return animeByCategoryLiveData
     }
 
     fun addAnimeToListFromUndo(animeData: AnimeDataToSave) {

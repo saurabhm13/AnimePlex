@@ -6,12 +6,13 @@ import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.animeplex.adapter.AnimeAdapter
 import com.example.animeplex.databinding.ActivityAnimeListByCategoryBinding
-import com.example.animeplex.viewmodel.ExploreViewModel
+import com.example.animeplex.db.AnimeDatabase
+import com.example.animeplex.viewmodel.HomeViewModel
 
 class AnimeListByCategoryActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAnimeListByCategoryBinding
-    val viewModel = ExploreViewModel()
+    private lateinit var viewModel: HomeViewModel
 
     lateinit var categoryId: String
     lateinit var categoryName: String
@@ -20,6 +21,10 @@ class AnimeListByCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAnimeListByCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val animeDatabase = AnimeDatabase.getInstance(this)
+
+        viewModel = HomeViewModel(animeDatabase)
 
         val intent = intent
         categoryId = intent.getStringExtra("Category Id")!!

@@ -17,6 +17,7 @@ import com.example.animeplex.adapter.CategoryAdapter
 import com.example.animeplex.adapter.MyAnimeListAdapter
 import com.example.animeplex.data.CategoryHome
 import com.example.animeplex.databinding.FragmentHomeBinding
+import com.example.animeplex.ui.activity.AllCategoryActivity
 import com.example.animeplex.ui.activity.AnimeListActivity
 import com.example.animeplex.ui.activity.AnimeListByCategoryActivity
 import com.example.animeplex.ui.activity.MainActivity
@@ -47,15 +48,15 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return (binding.root)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         // Featured Anime
-        viewModel.getFeaturedAnime()
-        observeFeaturedAnime()
+        if (imageList.isEmpty()) {
+            viewModel.getFeaturedAnime()
+            observeFeaturedAnime()
+        }else {
+            binding.imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
+        }
+
         onFeaturedAnimeItemClick()
 
         // Category List
@@ -63,6 +64,7 @@ class HomeFragment : Fragment() {
         createCategoryList()
         categoryAdapter.setCategoryList(categoryList)
         onCategoryItemClick()
+        onMoreCategoryClick()
 
         // Top Anime
         viewModel.getTopAnime()
@@ -80,26 +82,74 @@ class HomeFragment : Fragment() {
         handler.postDelayed(
             Runnable {
 
-                // Top Manga
-                viewModel.getTopManga()
-                prepareTopMangaRecyclerView()
-                onMoreTopMangaClick()
+                if (isAdded) {
+                    // Top Manga
+                    viewModel.getTopManga()
+                    prepareTopMangaRecyclerView()
+                    onMoreTopMangaClick()
+                }
 
-            },1000
+
+            },2000
         )
 
         handler.postDelayed(
             Runnable {
 
-                // Upcoming Anime
-                viewModel.getUpcomingAnime()
-                prepareUpcomingAnimeRecyclerView()
-                onMoreUpComingAnimeClick()
+                if (isAdded) {
+                    // Upcoming Anime
+                    viewModel.getUpcomingAnime()
+                    prepareUpcomingAnimeRecyclerView()
+                    onMoreUpComingAnimeClick()
+                }
+
 
             },
             2500
         )
 
+        handler.postDelayed(
+            Runnable {
+
+                if (isAdded) {
+                    // Anime Movies
+                    viewModel.getMovieAnime()
+                    prepareMovieAnimeRecyclerView()
+                    onMoreMovieAnimeClick()
+                }
+
+
+            },3000
+        )
+
+        handler.postDelayed(
+            Runnable {
+
+                if (isAdded) {
+                    // Award Winning
+                    viewModel.getAwardWinningAnime(46)
+                    prepareAwardWinningAnimeRecyclerView()
+                    onMoreAwardWinningClick()
+                }
+
+
+            },4000
+        )
+
+        handler.postDelayed(
+            Runnable {
+
+                if (isAdded) {
+                    // Action Anime
+                    viewModel.getActionAnime(1)
+                    prepareActionAnimeRecyclerView()
+                    onMoreActionAnimeClick()
+                }
+
+            },5000
+        )
+
+        return (binding.root)
     }
 
     // Featured Anime
@@ -155,9 +205,25 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun onMoreCategoryClick() {
+        binding.categoriesHome.setOnClickListener {
+            val intoAllCategory = Intent(activity, AllCategoryActivity::class.java)
+            startActivity(intoAllCategory)
+        }
+
+        binding.categoryMoreHome.setOnClickListener {
+            val intoAllCategory = Intent(activity, AllCategoryActivity::class.java)
+            startActivity(intoAllCategory)
+        }
+    }
+
 
     // Top Anime
     private fun prepareTopAnimeRecyclerView() {
+
+        if (!isAdded) {
+            return
+        }
 
         val animeAdapter = AnimeAdapter {
             val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
@@ -171,8 +237,10 @@ class HomeFragment : Fragment() {
             adapter = animeAdapter
         }
 
-        viewModel.observeTopAnimeLiveData().observe(viewLifecycleOwner) {
-            animeAdapter.setTopAnimeList(it.data)
+        if (isAdded) {
+            viewModel.observeTopAnimeLiveData().observe(viewLifecycleOwner) {
+                animeAdapter.setTopAnimeList(it.data)
+            }
         }
     }
 
@@ -196,10 +264,11 @@ class HomeFragment : Fragment() {
     // Top Manga
     private fun prepareTopMangaRecyclerView(){
 
+        if (!isAdded) {
+            return
+        }
+
         val animeAdapter = AnimeAdapter {
-//            val inToMangaDetails = Intent(activity, MangaDetailActivity::class.java)
-//            inToMangaDetails.putExtra("id", it.mal_id.toString())
-//            startActivity(inToMangaDetails)
             val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
             inToDetails.putExtra("id", it.mal_id.toString())
             inToDetails.putExtra("Content", "Manga")
@@ -212,8 +281,10 @@ class HomeFragment : Fragment() {
             adapter = animeAdapter
         }
 
-        viewModel.observeTopMangaLiveData().observe(viewLifecycleOwner) {
-            animeAdapter.setTopAnimeList(it.data)
+        if (isAdded) {
+            viewModel.observeTopMangaLiveData().observe(viewLifecycleOwner) {
+                animeAdapter.setTopAnimeList(it.data)
+            }
         }
     }
 
@@ -234,6 +305,10 @@ class HomeFragment : Fragment() {
     // Upcoming Anime
     private fun prepareUpcomingAnimeRecyclerView() {
 
+        if (!isAdded) {
+            return
+        }
+
         val animeAdapter = AnimeAdapter {
             val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
             inToDetails.putExtra("id", it.mal_id.toString())
@@ -246,8 +321,10 @@ class HomeFragment : Fragment() {
             adapter = animeAdapter
         }
 
-        viewModel.observeUpcomingAnimeLiveData().observe(viewLifecycleOwner) {
-            animeAdapter.setTopAnimeList(it.data)
+        if (isAdded) {
+            viewModel.observeUpcomingAnimeLiveData().observe(viewLifecycleOwner) {
+                animeAdapter.setTopAnimeList(it.data)
+            }
         }
     }
 
@@ -303,6 +380,128 @@ class HomeFragment : Fragment() {
             startActivity(intoAnimeList)
         }
     }
+
+    // Anime Movie
+    private fun prepareMovieAnimeRecyclerView() {
+
+        if (!isAdded) {
+            return
+        }
+
+        val animeAdapter = AnimeAdapter {
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
+        }
+
+        binding.rvAnimeMovieHome.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = animeAdapter
+        }
+
+        if (isAdded) {
+            viewModel.observeMovieAnimeLiveData().observe(viewLifecycleOwner) {
+                animeAdapter.setTopAnimeList(it.data)
+            }
+        }
+    }
+
+    private fun onMoreMovieAnimeClick() {
+        binding.animeMovieHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Anime Movie")
+            startActivity(intoAnimeList)
+        }
+
+        binding.animeMovieMoreHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Anime Movie")
+            startActivity(intoAnimeList)
+        }
+    }
+
+    // Award Winning Anime
+    private fun prepareAwardWinningAnimeRecyclerView() {
+
+        if (!isAdded) {
+            return
+        }
+
+        val animeAdapter = AnimeAdapter{
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
+        }
+
+        binding.rvAwardWinningAnimeHome.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = animeAdapter
+        }
+
+        if (isAdded) {
+            viewModel.observeAwardWinningAnimeLiveData().observe(viewLifecycleOwner) {
+                animeAdapter.setTopAnimeList(it.data)
+            }
+        }
+    }
+
+    private fun onMoreAwardWinningClick() {
+        binding.awardWinningAnimeHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Award Winning")
+            startActivity(intoAnimeList)
+        }
+
+        binding.awardWinningAnimeMoreHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Award Winning")
+            startActivity(intoAnimeList)
+        }
+    }
+
+    // Action Anime
+    private fun prepareActionAnimeRecyclerView() {
+
+        if (!isAdded) {
+            return
+        }
+
+        val animeAdapter = AnimeAdapter{
+            val inToDetails = Intent(activity, AnimeMangaDetailActivity::class.java)
+            inToDetails.putExtra("id", it.mal_id.toString())
+            inToDetails.putExtra("Content", "Anime")
+            startActivity(inToDetails)
+        }
+
+        binding.rvActionAnimeHome.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = animeAdapter
+        }
+
+        if (isAdded) {
+            viewModel.observeActionAnimeLiveData().observe(viewLifecycleOwner) {
+                animeAdapter.setTopAnimeList(it.data)
+            }
+        }
+
+    }
+
+    private fun onMoreActionAnimeClick() {
+        binding.actionAnimeHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Action Anime")
+            startActivity(intoAnimeList)
+        }
+
+        binding.actionAnimeMoreHome.setOnClickListener {
+            val intoAnimeList = Intent(activity, AnimeListActivity::class.java)
+            intoAnimeList.putExtra("Type", "Action Anime")
+            startActivity(intoAnimeList)
+        }
+    }
+
 
     private fun onMoreClick() {
         val intoAnimeList = Intent(activity, AnimeListActivity::class.java)

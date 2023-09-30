@@ -10,12 +10,12 @@ import com.example.animeplex.databinding.AnimeItemBinding
 
 class AnimeAdapter(private val onItemClick: (AnimeData) -> Unit) : RecyclerView.Adapter<AnimeAdapter.TopAnimeViewHolder>() {
 
-    private var topAnimeList = ArrayList<AnimeData>()
+    private var animeList = ArrayList<AnimeData>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setTopAnimeList(animeList: List<AnimeData>) {
-        topAnimeList.clear()
-        topAnimeList.addAll(animeList)
+        this.animeList.clear()
+        this.animeList.addAll(animeList)
         notifyDataSetChanged()
     }
 
@@ -24,10 +24,10 @@ class AnimeAdapter(private val onItemClick: (AnimeData) -> Unit) : RecyclerView.
         return TopAnimeViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = topAnimeList.size
+    override fun getItemCount(): Int = animeList.size
 
     override fun onBindViewHolder(holder: TopAnimeViewHolder, position: Int) {
-        val item = topAnimeList[position]
+        val item = animeList[position]
         holder.bind(item)
     }
 

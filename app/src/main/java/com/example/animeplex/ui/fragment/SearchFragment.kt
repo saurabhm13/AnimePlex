@@ -1,27 +1,37 @@
-package com.example.animeplex.ui.activity
+package com.example.animeplex.ui.fragment
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.animeplex.R
 import com.example.animeplex.adapter.SearchResultAdapter
-import com.example.animeplex.databinding.ActivitySearchBinding
-import com.example.animeplex.viewmodel.ExploreViewModel
+import com.example.animeplex.databinding.FragmentSearchBinding
+import com.example.animeplex.ui.activity.AnimeMangaDetailActivity
+import com.example.animeplex.ui.activity.MainActivity
+import com.example.animeplex.viewmodel.HomeViewModel
 
-class SearchActivity : AppCompatActivity() {
+class SearchFragment : Fragment() {
 
-
-    private lateinit var binding: ActivitySearchBinding
-    private var exploreViewModel = ExploreViewModel()
+    private lateinit var binding: FragmentSearchBinding
+    private lateinit var viewModel: HomeViewModel
 
     private lateinit var searchQuery: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        viewModel = (activity as MainActivity).viewModel
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         searchQuery = binding.searchQuery.text.toString().trim()
 
@@ -29,7 +39,7 @@ class SearchActivity : AppCompatActivity() {
             searchQuery = binding.searchQuery.text.toString().trim()
 
             if (searchQuery.isNotEmpty()){
-                exploreViewModel.getAnimeSearchResult(searchQuery)
+                viewModel.getAnimeSearchResult(searchQuery)
                 prepareResultRecyclerView(-1)
             }
         }
@@ -40,11 +50,13 @@ class SearchActivity : AppCompatActivity() {
 
         prepareResultRecyclerView(-1)
 
+
+        return binding.root
     }
 
     private fun prepareResultRecyclerView(checkedId: Int) {
 
-        val intoDetail = Intent(this, AnimeMangaDetailActivity::class.java)
+        val intoDetail = Intent(activity, AnimeMangaDetailActivity::class.java)
 
         val searchResultAdapter = SearchResultAdapter {
 
@@ -60,23 +72,23 @@ class SearchActivity : AppCompatActivity() {
         when (checkedId) {
             R.id.chip_anime -> {
                 intoDetail.putExtra("Content", "Anime")
-                exploreViewModel.getAnimeSearchResult(searchQuery)
-                exploreViewModel.observeAnimeSearchLiveData().observe(this) {
+                viewModel.getAnimeSearchResult(searchQuery)
+                viewModel.observeAnimeSearchLiveData().observe(viewLifecycleOwner) {
                     searchResultAdapter.setSearchList(it.data)
                     binding.chipGroupSearch.visibility = View.VISIBLE
                 }
             }
             R.id.chip_manga -> {
                 intoDetail.putExtra("Content", "Manga")
-                exploreViewModel.getMangaSearchResult(searchQuery)
-                exploreViewModel.observeMangaSearchLiveData().observe(this) {
+                viewModel.getMangaSearchResult(searchQuery)
+                viewModel.observeMangaSearchLiveData().observe(viewLifecycleOwner) {
                     searchResultAdapter.setSearchList(it.data)
                     binding.chipGroupSearch.visibility = View.VISIBLE
                 }
             }
             else -> {
                 intoDetail.putExtra("Content", "Anime")
-                exploreViewModel.observeAnimeSearchLiveData().observe(this) {
+                viewModel.observeAnimeSearchLiveData().observe(viewLifecycleOwner) {
                     searchResultAdapter.setSearchList(it.data)
                     binding.chipGroupSearch.visibility = View.VISIBLE
                 }
@@ -84,4 +96,5 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
+
 }
