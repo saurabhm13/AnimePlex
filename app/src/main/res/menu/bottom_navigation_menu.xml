@@ -12,9 +12,9 @@
         app:cnb_iconColor="@color/manga_color"
         android:icon="@drawable/ic_search"/>
 
-    <item android:id="@+id/profileFragment"
-        android:title="@string/profile"
+    <item android:id="@+id/myListFragment"
+        android:title="@string/my_list"
         app:cnb_iconColor="@color/Profile_color"
-        android:icon="@drawable/ic_person"/>
+        android:icon="@drawable/ic_bookmark"/>
 
 </menu>

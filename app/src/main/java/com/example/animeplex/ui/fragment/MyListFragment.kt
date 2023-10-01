@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.animeplex.R
 import com.example.animeplex.adapter.ListAdapter
 import com.example.animeplex.adapter.MyAnimeListAdapter
-import com.example.animeplex.databinding.FragmentProfileBinding
+import com.example.animeplex.databinding.FragmentMyListBinding
 import com.example.animeplex.ui.activity.MainActivity
 import com.example.animeplex.ui.activity.AnimeMangaDetailActivity
 import com.example.animeplex.viewmodel.HomeViewModel
 
-class ProfileFragment : Fragment() {
+class MyListFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private lateinit var binding: FragmentMyListBinding
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentMyListBinding.inflate(inflater, container, false)
 
         prepareMyAnimeListRecyclerView(-1)
 

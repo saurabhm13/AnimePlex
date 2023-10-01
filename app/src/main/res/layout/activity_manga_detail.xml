@@ -48,8 +48,7 @@
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:contentDescription="@string/anime_image"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img3" />
+                    android:scaleType="centerCrop"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -134,7 +133,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="@string/_2000"
                             android:textAlignment="center" />
 
                     </LinearLayout>
@@ -159,7 +157,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="@string/_23_min"
                             android:textAlignment="center" />
 
                     </LinearLayout>
@@ -184,7 +181,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="@string/_12"
                             android:textAlignment="center" />
 
                     </LinearLayout>
@@ -215,7 +211,6 @@
                 android:layout_marginEnd="10dp"
                 android:ellipsize="end"
                 android:maxLines="10"
-                android:text="@string/lorem_ipsum"
                 android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

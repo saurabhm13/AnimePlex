@@ -11,10 +11,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.animeplex.ui.fragment.ProfileFragment"
+        android:id="@+id/myListFragment"
+        android:name="com.example.animeplex.ui.fragment.MyListFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_my_list" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.animeplex.ui.fragment.SearchFragment"
